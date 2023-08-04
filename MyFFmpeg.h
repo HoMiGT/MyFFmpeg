@@ -8,11 +8,8 @@
 #include <memory>
 #include <thread>
 #include <chrono>
+#include <vector>
 
-#include <opencv2/opencv.hpp>
-//#include <pybind11/pybind11.h>
-//#include <pybind11/numpy.h>
-//#include <pybind11/stl.h>
 extern "C" {
 #include <libavcodec/avcodec.h>
 #include <libavformat/avformat.h>
@@ -23,6 +20,12 @@ extern "C" {
 #include <libavfilter/buffersrc.h>
 #include <libavfilter/buffersink.h>
 }
+#include <opencv2/opencv.hpp>
+#include <pybind11/pybind11.h>
+#include <pybind11/numpy.h>
+#include <pybind11/stl.h>
+
+namespace py = pybind11;
 
 #define MYERRCODE(e)  ((-e))
 
@@ -150,6 +153,7 @@ static const enum MyFFmpegState {
 	OTHER_ERROR_ETXTBSY = MYERRCODE(ETXTBSY), // -139 文本忙
 	OTHER_ERROR_EWOULDBLOCK = MYERRCODE(EWOULDBLOCK), // -140 操作将阻塞
 	OTHER_ERROR_CONTINUE = MYERRCODE(1001), // -1001 继续读帧
+	OTHER_ERROR_EINVAL = MYERRCODE(EINVAL), // -22 无效的参数
 };
 
 
@@ -270,15 +274,33 @@ static const std::map<int, int> StateConvert = {
 	{ static_cast<int>(OTHER_ERROR_ETXTBSY),3212}, // -139 文本忙
 	{ static_cast<int>(OTHER_ERROR_EWOULDBLOCK),3213}, // -140 操作将阻塞
 	{static_cast<int>(OTHER_ERROR_CONTINUE),3214}, // -1001 继续读帧
+	{static_cast<int>(OTHER_ERROR_EINVAL),3215}, // -22 无效参数
 };
 
 class MyFFmpeg {
+public:
+	MyFFmpeg(const std::string& video_path,
+		double crop_y_rate = 0.5,
+		int open_try_count = 15,
+		int packet_of_frame = 30,
+		bool print_av_format = false
+	);
+	~MyFFmpeg();
+
+	int initialize() noexcept; // 初始化
+	int decode();  // 解码帧
+	py::list frames(); // 获取帧
+
 private:
 	double m_crop_y_rate{ 0.5 };  // 默认高截取的比率
-	int m_crop_x{ 0 };
-	int m_crop_y{ 0 };
-	int m_crop_width{ 0 };
-	int m_crop_height{ 0 };
+	int m_open_try_count{ 0 };  // 打开尝试次数
+	int m_open_try_index{ 0 };  // 打开尝试索引
+	int m_packet_of_frames{ 30 };  // 一次读取的帧数
+	bool m_print_av_format{ false }; // 判断是否打印视频信息
+	int m_crop_x{ 0 };  // 截取图片的x坐标
+	int m_crop_y{ 0 };  // 截图图片的y坐标
+	int m_crop_width{ 0 };  // 截取图片的宽度
+	int m_crop_height{ 0 };  // 截取图片的高度
 	int m_ret{ MYFS_DEFAULT };  // 默认结果状态
 	int m_stream_index{ -1 };  // 默认视频缩影
 	const std::string m_video_path;  // 视频路径
@@ -291,25 +313,12 @@ private:
 	AVFrame* m_frame{ nullptr };  // 帧 av_frame_free
 	AVFrame* m_frame_bgr{ nullptr };  // bgr帧 av_frame_free
 	uint8_t* m_bgr_buffer; // bgr缓冲区 av_free
+	std::vector<cv::Mat> m_frames{ m_packet_of_frames };  // 帧容器
 
 	void clean_up(); // 清理内存
-	void crop(int index) noexcept;  // 裁剪
+	void crop() noexcept;  // 裁剪
+	std::chrono::milliseconds sleep(int index);
 
-public:
-	MyFFmpeg(const std::string& video_path, double crop_y_rate = 0.5)
-		: m_video_path(video_path)
-		, m_crop_y_rate(crop_y_rate)
-	{
-		av_dict_set(&m_format_options, "probesize", "1048576", 0);  // 设置探测大小 1MB
-		av_dict_set(&m_format_options, "max_analyze_duration", "1500000", 0);  // 设置最大分析时长 1.5s
-		av_dict_set(&m_format_options, "stimeout", "300000", 0); // 设置超时时间 300ms
-		av_dict_set(&m_format_options, "analyzeduration", "1000000", 0); // 设置分析时长 1s
-	};
-	~MyFFmpeg() {
-		clean_up();
-	};
-
-	int initialize() noexcept; // 初始化
-	int frame(int index);  // 获取帧
 };
+
 
