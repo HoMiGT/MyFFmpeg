@@ -1,0 +1,3 @@
+/home/c/projects/MyFFmpeg/build/CMakeFiles/rebuild_cache.dir
+/home/c/projects/MyFFmpeg/build/CMakeFiles/edit_cache.dir
+/home/c/projects/MyFFmpeg/build/CMakeFiles/MyFFmpeg.dir
