@@ -14,7 +14,9 @@ set(PLATFORM "x64-linux")
 set(LIB_SUFFIX ".so")
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 ")
 
-set(CMAKE_PREFIX_PATH "$ENV{VCPKG_ROOT}/installed/x64-linux/share")
+set(CMAKE_INSTALL_PATH "~/projects/MyFFmpeg")
+set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
+# set(CMAKE_PREFIX_PATH "$ENV{VCPKG_ROOT}/installed/x64-linux/share")
 
 set(OpenCV_DIR "$ENV{VCPKG_ROOT}/installed/x64-linux/share/opencv4")
 set(FFMPEG_DIR "$ENV{VCPKG_ROOT}/installed/x64-linux/share/ffmpeg")
@@ -63,7 +65,28 @@ target_link_libraries(MyFFmpeg
     ${OpenCV_LIBS}
     ${FFMPEG_LIBRARIES}
 )
-# set_target_properties(MyFFmpeg PROPERTIES SUFFIX ".so")
+
+install(TARGETS MyFFmpeg
+        RUNTIME DESTINATION ${CMAKE_INSTALL_PATH}/lib
+        LIBRARY DESTINATION ${CMAKE_INSTALL_PATH}/lib)
+
+list(APPEND MY_SHARED_LIBS
+    $ENV{VCPKG_ROOT}/installed/x64-linux/lib/libavcodec.so.59.37.100
+    $ENV{VCPKG_ROOT}/installed/x64-linux/lib/libavfilter.so.8.44.100
+    $ENV{VCPKG_ROOT}/installed/x64-linux/lib/libavformat.so.59.27.100
+    $ENV{VCPKG_ROOT}/installed/x64-linux/lib/libavutil.so.57.28.100
+    $ENV{VCPKG_ROOT}/installed/x64-linux/lib/libswresample.so.4.7.100
+    $ENV{VCPKG_ROOT}/installed/x64-linux/lib/libswscale.so.6.7.100
+    $ENV{VCPKG_ROOT}/installed/x64-linux/lib/libopencv_core4.so.4.7.0
+    $ENV{VCPKG_ROOT}/installed/x64-linux/lib/libopencv_imgcodecs4.so.4.7.0
+    $ENV{VCPKG_ROOT}/installed/x64-linux/lib/libopencv_imgproc4.so.4.7.0
+)
+
+foreach(SHARED_LIB ${MY_SHARED_LIBS})
+    file(COPY ${SHARED_LIB} DESTINATION /home/c/projects/MyFFmpeg/lib)
+endforeach()
+
+
 
 
 

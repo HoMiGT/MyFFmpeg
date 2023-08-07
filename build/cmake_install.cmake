@@ -42,6 +42,34 @@ if(NOT DEFINED CMAKE_OBJDUMP)
   set(CMAKE_OBJDUMP "/usr/bin/objdump")
 endif()
 
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  if(EXISTS "$ENV{DESTDIR}/home/c/projects/MyFFmpeg/lib/MyFFmpeg.cpython-311-x86_64-linux-gnu.so" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}/home/c/projects/MyFFmpeg/lib/MyFFmpeg.cpython-311-x86_64-linux-gnu.so")
+    file(RPATH_CHECK
+         FILE "$ENV{DESTDIR}/home/c/projects/MyFFmpeg/lib/MyFFmpeg.cpython-311-x86_64-linux-gnu.so"
+         RPATH "/home/c/vcpkg/installed/x64-linux/lib:/home/c/vcpkg/installed/x64-linux/debug/lib")
+  endif()
+  list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
+   "/home/c/projects/MyFFmpeg/lib/MyFFmpeg.cpython-311-x86_64-linux-gnu.so")
+  if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
+    message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
+  endif()
+  if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
+    message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
+  endif()
+file(INSTALL DESTINATION "/home/c/projects/MyFFmpeg/lib" TYPE MODULE FILES "/home/c/projects/MyFFmpeg/build/MyFFmpeg.cpython-311-x86_64-linux-gnu.so")
+  if(EXISTS "$ENV{DESTDIR}/home/c/projects/MyFFmpeg/lib/MyFFmpeg.cpython-311-x86_64-linux-gnu.so" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}/home/c/projects/MyFFmpeg/lib/MyFFmpeg.cpython-311-x86_64-linux-gnu.so")
+    file(RPATH_CHANGE
+         FILE "$ENV{DESTDIR}/home/c/projects/MyFFmpeg/lib/MyFFmpeg.cpython-311-x86_64-linux-gnu.so"
+         OLD_RPATH "/home/c/vcpkg/installed/x64-linux/lib:/home/c/vcpkg/installed/x64-linux/debug/lib:"
+         NEW_RPATH "/home/c/vcpkg/installed/x64-linux/lib:/home/c/vcpkg/installed/x64-linux/debug/lib")
+    if(CMAKE_INSTALL_DO_STRIP)
+      execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}/home/c/projects/MyFFmpeg/lib/MyFFmpeg.cpython-311-x86_64-linux-gnu.so")
+    endif()
+  endif()
+endif()
+
 if(CMAKE_INSTALL_COMPONENT)
   set(CMAKE_INSTALL_MANIFEST "install_manifest_${CMAKE_INSTALL_COMPONENT}.txt")
 else()
