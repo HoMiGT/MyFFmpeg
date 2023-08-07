@@ -1,2 +1,0 @@
-# MyFFmpeg
-MyFFmpeg pybind11 
