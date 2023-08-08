@@ -82,7 +82,6 @@ void MyFFmpeg::clean_up() {
 	m_codec_ctx = nullptr;
 
 	if (m_format_ctx) {
-		avformat_close_input(&m_format_ctx);
 		avformat_free_context(m_format_ctx);
 	}
 	m_format_ctx = nullptr;
@@ -179,13 +178,17 @@ int MyFFmpeg::initialize() noexcept {
 	} while (try_index < 2);
 	if (!m_bgr_buffer) PKRT(INIT_ERR_ALLOC_BGR_BUFFER);
 	m_crop_width = m_codec_ctx->width;
-	m_crop_height = static_cast<int>(floor(m_codec_ctx->height * (m_crop_y_rate >= 1 ? 1 : (!m_crop_y_rate ? m_crop_y_rate : 0.1))));
+	m_crop_height = static_cast<int>(floor(m_codec_ctx->height * (m_crop_y_rate >= 1 ? 1 : m_crop_y_rate)));
 	m_crop_y = static_cast<int>(floor((m_codec_ctx->height - m_crop_height) / 2));
 	m_crop_x = 0;
 	PKRT(MYFS_SUCCESS);
 }
 
 int MyFFmpeg::decode() {
+	if (m_is_suspend){ // 暂停 要对其恢复
+		av_read_play(m_format_ctx);
+		m_is_suspend = false;
+	}
 	int index = 0;
 	m_frames.clear();
 	for (;;) {
@@ -200,8 +203,11 @@ int MyFFmpeg::decode() {
 			}
 			if (m_ret == OTHER_ERROR_EAGAIN || m_ret == AV_EOF) PKRT(m_ret);
 			av_packet_unref(m_packet);
-			if (index > m_packet_of_frames) PKRT(MYFS_SUCCESS);
-			index++;
+			if (++index >= m_packet_of_frames){
+				av_read_pause(m_format_ctx);
+				m_is_suspend = true;
+				PKRT(MYFS_SUCCESS);	
+			} 
 		}
 	}
 }
@@ -210,16 +216,18 @@ py::list MyFFmpeg::frames() {
 
 	py::list py_mats;
 	for (auto& mat : m_frames) {
-		py_mats.append(py::array(py::buffer_info(
-			mat.data,				// uchar*                 
-			sizeof(uchar),       // 内存大小                  
-			py::format_descriptor<uchar>::format(), // 对数据格式化
-			3,                                      // 维度
-			{ mat.rows, mat.cols },          // 高 宽
-			{ sizeof(uchar) * mat.cols, sizeof(uchar) }  // 每次的步长 sizeof(uchar) * 宽， 也就是1字节
-		)));
+		py::array_t<unsigned char> numpy_array({ mat.rows, mat.cols, mat.channels()}, mat.data);
+		py_mats.append(numpy_array);
 	}
 	return py_mats;
+}
+
+int MyFFmpeg::close(){
+	if (m_format_ctx){
+		avformat_close_input(&m_format_ctx);
+		PKRT(MYFS_SUCCESS);
+	}
+	PKRT(MYFS_SUCCESS);
 }
 
 PYBIND11_MODULE(MyFFmpeg, m) {
@@ -227,6 +235,7 @@ PYBIND11_MODULE(MyFFmpeg, m) {
 		.def(py::init<const std::string&, const double, const int, const int, const int>())
 		.def("initialize", &MyFFmpeg::initialize)
 		.def("decode", &MyFFmpeg::decode)
-		.def("frames", &MyFFmpeg::frames, py::return_value_policy::move);
+		.def("frames", &MyFFmpeg::frames, py::return_value_policy::move)
+		.def("close",&MyFFmpeg::close);
 }
 

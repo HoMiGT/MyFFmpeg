@@ -290,6 +290,7 @@ public:
 	int initialize() noexcept; // 初始化
 	int decode();  // 解码帧
 	py::list frames(); // 获取帧
+	int close(); // close input 
 
 private:
 	double m_crop_y_rate{ 0.5 };  // 默认高截取的比率
@@ -303,6 +304,7 @@ private:
 	int m_crop_height{ 0 };  // 截取图片的高度
 	int m_ret{ MYFS_DEFAULT };  // 默认结果状态
 	int m_stream_index{ -1 };  // 默认视频缩影
+	bool m_is_suspend {false}; // 是否暂停视频读取
 	const std::string m_video_path;  // 视频路径
 	AVDictionary* m_format_options{ nullptr };  // 选项 av_dict_free
 	AVFormatContext* m_format_ctx{ nullptr };  // 格式上下文 avformat_close_input  avformat_free_context
