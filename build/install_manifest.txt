@@ -1,1 +1,1 @@
-/home/c/projects/MyFFmpeg/lib/MyFFmpeg.cpython-310-x86_64-linux-gnu.so
+/home/wpwl/Projects/MyFFmpeg/lib/MyFFmpeg.cpython-310-x86_64-linux-gnu.so

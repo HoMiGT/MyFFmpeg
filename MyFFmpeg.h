@@ -33,7 +33,7 @@ namespace py = pybind11;
 #define PKRT(k)  return ( StateConvert.count(static_cast<int>(k)) ? StateConvert.at(static_cast<int>(k)) : 3999 ) 
 
 /// ffmpeg version 5.1.2
-static const enum MyFFmpegState {
+enum MyFFmpegState {
 	MYFS_DEFAULT = -1000,  //  不匹配时的 默认状态
 
 	MYFS_SUCCESS = 0,  // 成功

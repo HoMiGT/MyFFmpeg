@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/MyFFmpeg.dir/MyFFmpeg.cpp.o"
+  "CMakeFiles/MyFFmpeg.dir/MyFFmpeg.cpp.o.d"
   "MyFFmpeg.cpython-310-x86_64-linux-gnu.so"
   "MyFFmpeg.pdb"
 )
