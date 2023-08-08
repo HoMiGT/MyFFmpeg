@@ -16,7 +16,7 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/home/c/vcpkg/installed/x64-linux/include"
-  "/home/c/miniconda3/include/python3.11"
+  "/home/c/miniconda3/envs/py10/include/python3.10"
   )
 
 # Targets to which this target links.

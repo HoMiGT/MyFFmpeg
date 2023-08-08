@@ -4,7 +4,7 @@
 # compile CXX with clang++
 CXX_DEFINES = -DMyFFmpeg_EXPORTS
 
-CXX_INCLUDES = -isystem /home/c/vcpkg/installed/x64-linux/include -isystem /home/c/miniconda3/include/python3.11
+CXX_INCLUDES = -isystem /home/c/vcpkg/installed/x64-linux/include -isystem /home/c/miniconda3/envs/py10/include/python3.10
 
 CXX_FLAGS = -O3 -DNDEBUG -O3  -fPIC -fvisibility=hidden -flto -fno-fat-lto-objects -std=gnu++17
 

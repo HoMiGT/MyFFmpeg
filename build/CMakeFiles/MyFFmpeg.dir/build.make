@@ -96,36 +96,36 @@ MyFFmpeg_OBJECTS = \
 # External object files for target MyFFmpeg
 MyFFmpeg_EXTERNAL_OBJECTS =
 
-MyFFmpeg.cpython-311-x86_64-linux-gnu.so: CMakeFiles/MyFFmpeg.dir/MyFFmpeg.cpp.o
-MyFFmpeg.cpython-311-x86_64-linux-gnu.so: CMakeFiles/MyFFmpeg.dir/build.make
-MyFFmpeg.cpython-311-x86_64-linux-gnu.so: /home/c/vcpkg/installed/x64-linux/lib/libopencv_highgui4.so.4.7.0
-MyFFmpeg.cpython-311-x86_64-linux-gnu.so: /home/c/vcpkg/installed/x64-linux/lib/libopencv_ml4.so.4.7.0
-MyFFmpeg.cpython-311-x86_64-linux-gnu.so: /home/c/vcpkg/installed/x64-linux/lib/libopencv_objdetect4.so.4.7.0
-MyFFmpeg.cpython-311-x86_64-linux-gnu.so: /home/c/vcpkg/installed/x64-linux/lib/libopencv_photo4.so.4.7.0
-MyFFmpeg.cpython-311-x86_64-linux-gnu.so: /home/c/vcpkg/installed/x64-linux/lib/libopencv_stitching4.so.4.7.0
-MyFFmpeg.cpython-311-x86_64-linux-gnu.so: /home/c/vcpkg/installed/x64-linux/lib/libopencv_video4.so.4.7.0
-MyFFmpeg.cpython-311-x86_64-linux-gnu.so: /home/c/vcpkg/installed/x64-linux/lib/libopencv_videoio4.so.4.7.0
-MyFFmpeg.cpython-311-x86_64-linux-gnu.so: /home/c/vcpkg/installed/x64-linux/lib/libavdevice.so
-MyFFmpeg.cpython-311-x86_64-linux-gnu.so: /home/c/vcpkg/installed/x64-linux/lib/libavfilter.so
-MyFFmpeg.cpython-311-x86_64-linux-gnu.so: /home/c/vcpkg/installed/x64-linux/lib/libavformat.so
-MyFFmpeg.cpython-311-x86_64-linux-gnu.so: /home/c/vcpkg/installed/x64-linux/lib/libavcodec.so
-MyFFmpeg.cpython-311-x86_64-linux-gnu.so: /home/c/vcpkg/installed/x64-linux/lib/libswresample.so
-MyFFmpeg.cpython-311-x86_64-linux-gnu.so: /home/c/vcpkg/installed/x64-linux/lib/libswscale.so
-MyFFmpeg.cpython-311-x86_64-linux-gnu.so: /home/c/vcpkg/installed/x64-linux/lib/libavutil.so
-MyFFmpeg.cpython-311-x86_64-linux-gnu.so: /home/c/vcpkg/installed/x64-linux/lib/libopencv_imgcodecs4.so.4.7.0
-MyFFmpeg.cpython-311-x86_64-linux-gnu.so: /home/c/vcpkg/installed/x64-linux/lib/libopencv_calib3d4.so.4.7.0
-MyFFmpeg.cpython-311-x86_64-linux-gnu.so: /home/c/vcpkg/installed/x64-linux/lib/libopencv_dnn4.so.4.7.0
-MyFFmpeg.cpython-311-x86_64-linux-gnu.so: /home/c/vcpkg/installed/x64-linux/lib/libopencv_features2d4.so.4.7.0
-MyFFmpeg.cpython-311-x86_64-linux-gnu.so: /home/c/vcpkg/installed/x64-linux/lib/libopencv_flann4.so.4.7.0
-MyFFmpeg.cpython-311-x86_64-linux-gnu.so: /home/c/vcpkg/installed/x64-linux/lib/libopencv_imgproc4.so.4.7.0
-MyFFmpeg.cpython-311-x86_64-linux-gnu.so: /home/c/vcpkg/installed/x64-linux/lib/libopencv_core4.so.4.7.0
-MyFFmpeg.cpython-311-x86_64-linux-gnu.so: CMakeFiles/MyFFmpeg.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/c/projects/MyFFmpeg/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX shared module MyFFmpeg.cpython-311-x86_64-linux-gnu.so"
+MyFFmpeg.cpython-310-x86_64-linux-gnu.so: CMakeFiles/MyFFmpeg.dir/MyFFmpeg.cpp.o
+MyFFmpeg.cpython-310-x86_64-linux-gnu.so: CMakeFiles/MyFFmpeg.dir/build.make
+MyFFmpeg.cpython-310-x86_64-linux-gnu.so: /home/c/vcpkg/installed/x64-linux/lib/libopencv_highgui4.so.4.7.0
+MyFFmpeg.cpython-310-x86_64-linux-gnu.so: /home/c/vcpkg/installed/x64-linux/lib/libopencv_ml4.so.4.7.0
+MyFFmpeg.cpython-310-x86_64-linux-gnu.so: /home/c/vcpkg/installed/x64-linux/lib/libopencv_objdetect4.so.4.7.0
+MyFFmpeg.cpython-310-x86_64-linux-gnu.so: /home/c/vcpkg/installed/x64-linux/lib/libopencv_photo4.so.4.7.0
+MyFFmpeg.cpython-310-x86_64-linux-gnu.so: /home/c/vcpkg/installed/x64-linux/lib/libopencv_stitching4.so.4.7.0
+MyFFmpeg.cpython-310-x86_64-linux-gnu.so: /home/c/vcpkg/installed/x64-linux/lib/libopencv_video4.so.4.7.0
+MyFFmpeg.cpython-310-x86_64-linux-gnu.so: /home/c/vcpkg/installed/x64-linux/lib/libopencv_videoio4.so.4.7.0
+MyFFmpeg.cpython-310-x86_64-linux-gnu.so: /home/c/vcpkg/installed/x64-linux/lib/libavdevice.so
+MyFFmpeg.cpython-310-x86_64-linux-gnu.so: /home/c/vcpkg/installed/x64-linux/lib/libavfilter.so
+MyFFmpeg.cpython-310-x86_64-linux-gnu.so: /home/c/vcpkg/installed/x64-linux/lib/libavformat.so
+MyFFmpeg.cpython-310-x86_64-linux-gnu.so: /home/c/vcpkg/installed/x64-linux/lib/libavcodec.so
+MyFFmpeg.cpython-310-x86_64-linux-gnu.so: /home/c/vcpkg/installed/x64-linux/lib/libswresample.so
+MyFFmpeg.cpython-310-x86_64-linux-gnu.so: /home/c/vcpkg/installed/x64-linux/lib/libswscale.so
+MyFFmpeg.cpython-310-x86_64-linux-gnu.so: /home/c/vcpkg/installed/x64-linux/lib/libavutil.so
+MyFFmpeg.cpython-310-x86_64-linux-gnu.so: /home/c/vcpkg/installed/x64-linux/lib/libopencv_imgcodecs4.so.4.7.0
+MyFFmpeg.cpython-310-x86_64-linux-gnu.so: /home/c/vcpkg/installed/x64-linux/lib/libopencv_calib3d4.so.4.7.0
+MyFFmpeg.cpython-310-x86_64-linux-gnu.so: /home/c/vcpkg/installed/x64-linux/lib/libopencv_dnn4.so.4.7.0
+MyFFmpeg.cpython-310-x86_64-linux-gnu.so: /home/c/vcpkg/installed/x64-linux/lib/libopencv_features2d4.so.4.7.0
+MyFFmpeg.cpython-310-x86_64-linux-gnu.so: /home/c/vcpkg/installed/x64-linux/lib/libopencv_flann4.so.4.7.0
+MyFFmpeg.cpython-310-x86_64-linux-gnu.so: /home/c/vcpkg/installed/x64-linux/lib/libopencv_imgproc4.so.4.7.0
+MyFFmpeg.cpython-310-x86_64-linux-gnu.so: /home/c/vcpkg/installed/x64-linux/lib/libopencv_core4.so.4.7.0
+MyFFmpeg.cpython-310-x86_64-linux-gnu.so: CMakeFiles/MyFFmpeg.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/c/projects/MyFFmpeg/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX shared module MyFFmpeg.cpython-310-x86_64-linux-gnu.so"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/MyFFmpeg.dir/link.txt --verbose=$(VERBOSE)
-	/usr/bin/strip /home/c/projects/MyFFmpeg/build/MyFFmpeg.cpython-311-x86_64-linux-gnu.so
+	/usr/bin/strip /home/c/projects/MyFFmpeg/build/MyFFmpeg.cpython-310-x86_64-linux-gnu.so
 
 # Rule to build all files generated by this target.
-CMakeFiles/MyFFmpeg.dir/build: MyFFmpeg.cpython-311-x86_64-linux-gnu.so
+CMakeFiles/MyFFmpeg.dir/build: MyFFmpeg.cpython-310-x86_64-linux-gnu.so
 
 .PHONY : CMakeFiles/MyFFmpeg.dir/build
 

@@ -478,7 +478,7 @@ FIND_PACKAGE_MESSAGE_DETAILS_OpenCV:INTERNAL=[/home/c/vcpkg/installed/x64-linux]
 //Details about finding Protobuf
 FIND_PACKAGE_MESSAGE_DETAILS_Protobuf:INTERNAL=[/home/c/vcpkg/installed/x64-linux/tools/protobuf/protoc-3.21.12.0][optimized;/home/c/vcpkg/installed/x64-linux/lib/libprotobuf.a;debug;/home/c/vcpkg/installed/x64-linux/debug/lib/libprotobufd.a][/home/c/vcpkg/installed/x64-linux/include][v3.21.12.0()]
 //Details about finding Python
-FIND_PACKAGE_MESSAGE_DETAILS_Python:INTERNAL=[/home/c/miniconda3/bin/python3.1][/home/c/miniconda3/include/python3.11][/home/c/miniconda3/lib/libpython3.11.so][cfound components: Interpreter Development Development.Module Development.Embed ][v3.11.4()]
+FIND_PACKAGE_MESSAGE_DETAILS_Python:INTERNAL=[/home/c/miniconda3/envs/py10/bin/python3.1][/home/c/miniconda3/envs/py10/include/python3.10][/home/c/miniconda3/envs/py10/lib/libpython3.10.so][cfound components: Interpreter Development Development.Module Development.Embed ][v3.10.0()]
 //Details about finding TIFF
 FIND_PACKAGE_MESSAGE_DETAILS_TIFF:INTERNAL=[/usr/lib/x86_64-linux-gnu/libtiff.so][/usr/include/x86_64-linux-gnu][v4.2.0()]
 //Details about finding Threads
@@ -486,10 +486,10 @@ FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
 //Test HAS_FLTO
 HAS_FLTO:INTERNAL=1
 //Python executable during the last CMake run
-PYBIND11_PYTHON_EXECUTABLE_LAST:INTERNAL=/home/c/miniconda3/bin/python3.1
+PYBIND11_PYTHON_EXECUTABLE_LAST:INTERNAL=/home/c/miniconda3/envs/py10/bin/python3.1
 //Python debug status
 PYTHON_IS_DEBUG:INTERNAL=0
-PYTHON_MODULE_EXTENSION:INTERNAL=.cpython-311-x86_64-linux-gnu.so
+PYTHON_MODULE_EXTENSION:INTERNAL=.cpython-310-x86_64-linux-gnu.so
 //ADVANCED property for variable: TIFF_INCLUDE_DIR
 TIFF_INCLUDE_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: TIFF_LIBRARY_DEBUG
@@ -497,21 +497,21 @@ TIFF_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: TIFF_LIBRARY_RELEASE
 TIFF_LIBRARY_RELEASE-ADVANCED:INTERNAL=1
 _Python:INTERNAL=Python
-_Python_DEVELOPMENT_EMBED_SIGNATURE:INTERNAL=e9a08fb9ec1826d471ec27063fd19d45
-_Python_DEVELOPMENT_MODULE_SIGNATURE:INTERNAL=6af1984e48700ddb55f4989c66de38e7
+_Python_DEVELOPMENT_EMBED_SIGNATURE:INTERNAL=f2dfbb54f48c08d310065c9cc17ed89f
+_Python_DEVELOPMENT_MODULE_SIGNATURE:INTERNAL=94fffb6fe29910320515dc9f9b4f8426
 //Path to a program.
-_Python_EXECUTABLE:INTERNAL=/home/c/miniconda3/bin/python3.1
+_Python_EXECUTABLE:INTERNAL=/home/c/miniconda3/envs/py10/bin/python3.1
 //Path to a file.
-_Python_INCLUDE_DIR:INTERNAL=/home/c/miniconda3/include/python3.11
+_Python_INCLUDE_DIR:INTERNAL=/home/c/miniconda3/envs/py10/include/python3.10
 //Python Properties
-_Python_INTERPRETER_PROPERTIES:INTERNAL=Python;3;11;4;64;;cpython-311-x86_64-linux-gnu;/home/c/miniconda3/lib/python3.11;/home/c/miniconda3/lib/python3.11;/home/c/miniconda3/lib/python3.11/site-packages;/home/c/miniconda3/lib/python3.11/site-packages
-_Python_INTERPRETER_SIGNATURE:INTERNAL=ee8ffe8c9d1a258ecf916860c1338e46
+_Python_INTERPRETER_PROPERTIES:INTERNAL=Python;3;10;0;64;;cpython-310-x86_64-linux-gnu;/home/c/miniconda3/envs/py10/lib/python3.10;/home/c/miniconda3/envs/py10/lib/python3.10;/home/c/miniconda3/envs/py10/lib/python3.10/site-packages;/home/c/miniconda3/envs/py10/lib/python3.10/site-packages
+_Python_INTERPRETER_SIGNATURE:INTERNAL=aa8282bd55954b335251d9800a2bd526
 //Path to a library.
-_Python_LIBRARY_RELEASE:INTERNAL=/home/c/miniconda3/lib/libpython3.11.so
+_Python_LIBRARY_RELEASE:INTERNAL=/home/c/miniconda3/envs/py10/lib/libpython3.10.so
 //ADVANCED property for variable: protobuf_MODULE_COMPATIBLE
 protobuf_MODULE_COMPATIBLE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: protobuf_VERBOSE
 protobuf_VERBOSE-ADVANCED:INTERNAL=1
 //Directories where pybind11 and possibly Python headers are located
-pybind11_INCLUDE_DIRS:INTERNAL=/home/c/vcpkg/installed/x64-linux/include;/home/c/miniconda3/include/python3.11
+pybind11_INCLUDE_DIRS:INTERNAL=/home/c/vcpkg/installed/x64-linux/include;/home/c/miniconda3/envs/py10/include/python3.10
 
