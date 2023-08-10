@@ -222,10 +222,10 @@ int MyFFmpeg::video_frames(py::array_t<uint8_t> arr,int arr_len){
 				if(fact_arr_index>=arr_len) return fact_arr_index;
 				video_crop(ptr,step,fact_arr_index);
 				fact_arr_index++;
+                av_frame_unref(m_frame);
 			}
-			if (m_frame) av_frame_unref(m_frame);
-			if (m_packet) av_packet_unref(m_packet);
 		}
+        av_packet_unref(m_packet);
 	}
 	if(!m_is_suspend){
 		av_read_pause(m_format_ctx);
