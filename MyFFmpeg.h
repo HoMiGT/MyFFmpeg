@@ -2,13 +2,8 @@
 
 #include <string>
 #include <map>
-#include <cstring>
-#include <cstdlib>
 #include <iostream>
-#include <memory>
-#include <thread>
 #include <chrono>
-#include <vector>
 
 extern "C" {
 #include <libavcodec/avcodec.h>
@@ -282,22 +277,22 @@ public:
 	MyFFmpeg(const std::string& video_path,
 		double crop_y_rate = 0.5,
 		int open_try_count = 15,
-		int packet_of_frame = 30,
-		bool print_av_format = false
+		int packet_of_frame = 30
 	);
 	~MyFFmpeg();
 
 	int initialize() noexcept; // 初始化
-	int decode();  // 解码帧
-	py::list frames(); // 获取帧
+	int video_info(py::array_t<int> arr); // 获取视频的信息
+	int video_frames(py::array_t<uint8_t> arr,int arr_len); // 获取帧
+
 	int close(); // close input 
+	static int my_interrupt_callback(void *opaque); // 定时检测打断
 
 private:
 	double m_crop_y_rate{ 0.5 };  // 默认高截取的比率
 	int m_open_try_count{ 0 };  // 打开尝试次数
 	int m_open_try_index{ 0 };  // 打开尝试索引
 	int m_packet_of_frames{ 30 };  // 一次读取的帧数
-	bool m_print_av_format{ false }; // 判断是否打印视频信息
 	int m_crop_x{ 0 };  // 截取图片的x坐标
 	int m_crop_y{ 0 };  // 截图图片的y坐标
 	int m_crop_width{ 0 };  // 截取图片的宽度
@@ -305,6 +300,9 @@ private:
 	int m_ret{ MYFS_DEFAULT };  // 默认结果状态
 	int m_stream_index{ -1 };  // 默认视频缩影
 	bool m_is_suspend {false}; // 是否暂停视频读取
+	bool m_is_closed_input{false}; // 是否关闭了 input
+	bool m_open_flag {false}; // 打开标识 用来判断回调函数是否计算时间超时
+	double m_open_start_time{ 0 }; // 打开视频的开始时间 
 	const std::string m_video_path;  // 视频路径
 	AVDictionary* m_format_options{ nullptr };  // 选项 av_dict_free
 	AVFormatContext* m_format_ctx{ nullptr };  // 格式上下文 avformat_close_input  avformat_free_context
@@ -314,11 +312,10 @@ private:
 	AVPacket* m_packet{ nullptr };  // 数据包 av_packet_free
 	AVFrame* m_frame{ nullptr };  // 帧 av_frame_free
 	AVFrame* m_frame_bgr{ nullptr };  // bgr帧 av_frame_free
-	uint8_t* m_bgr_buffer; // bgr缓冲区 av_free
-	std::vector<cv::Mat> m_frames;  // 帧容器
+	uint8_t* m_bgr_buffer{nullptr}; // bgr缓冲区 av_free
 
 	void clean_up(); // 清理内存
-	void crop() noexcept;  // 裁剪
+	void video_crop(uint8_t* arr,unsigned long step,int index); // 视频截取
 	std::chrono::milliseconds sleep(int index);
 
 };

@@ -110,8 +110,6 @@ CMakeFiles/MyFFmpeg.dir/MyFFmpeg.cpp.o: \
  /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/uses_allocator.h \
  /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/invoke.h \
  /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/stl_multimap.h \
- /opt/rh/devtoolset-8/root/usr/include/c++/8/cstring \
- /usr/include/string.h \
  /opt/rh/devtoolset-8/root/usr/include/c++/8/iostream \
  /opt/rh/devtoolset-8/root/usr/include/c++/8/ostream \
  /opt/rh/devtoolset-8/root/usr/include/c++/8/ios \
@@ -134,30 +132,10 @@ CMakeFiles/MyFFmpeg.dir/MyFFmpeg.cpp.o: \
  /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/ostream.tcc \
  /opt/rh/devtoolset-8/root/usr/include/c++/8/istream \
  /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/istream.tcc \
- /opt/rh/devtoolset-8/root/usr/include/c++/8/memory \
- /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/stl_construct.h \
- /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/stl_uninitialized.h \
- /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/stl_tempbuf.h \
- /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/stl_raw_storage_iter.h \
- /opt/rh/devtoolset-8/root/usr/include/c++/8/ext/concurrence.h \
- /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/unique_ptr.h \
- /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/shared_ptr.h \
- /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/shared_ptr_base.h \
- /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/allocated_ptr.h \
- /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/refwrap.h \
- /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/shared_ptr_atomic.h \
- /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/atomic_base.h \
- /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/atomic_lockfree_defines.h \
- /opt/rh/devtoolset-8/root/usr/include/c++/8/backward/auto_ptr.h \
- /opt/rh/devtoolset-8/root/usr/include/c++/8/thread \
  /opt/rh/devtoolset-8/root/usr/include/c++/8/chrono \
  /opt/rh/devtoolset-8/root/usr/include/c++/8/ratio \
  /opt/rh/devtoolset-8/root/usr/include/c++/8/ctime \
  /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/parse_numbers.h \
- /opt/rh/devtoolset-8/root/usr/include/c++/8/vector \
- /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/stl_vector.h \
- /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/stl_bvector.h \
- /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/vector.tcc \
  /home/wpwl/vcpkg/installed/x64-linux-dynamic/include/libavcodec/avcodec.h \
  /home/wpwl/vcpkg/installed/x64-linux-dynamic/include/libavutil/samplefmt.h \
  /home/wpwl/vcpkg/installed/x64-linux-dynamic/include/libavutil/attributes.h \
@@ -190,6 +168,7 @@ CMakeFiles/MyFFmpeg.dir/MyFFmpeg.cpp.o: \
  /opt/rh/devtoolset-8/root/usr/include/c++/8/tr1/poly_laguerre.tcc \
  /opt/rh/devtoolset-8/root/usr/include/c++/8/tr1/riemann_zeta.tcc \
  /opt/rh/devtoolset-8/root/usr/include/c++/8/stdlib.h \
+ /usr/include/string.h \
  /home/wpwl/vcpkg/installed/x64-linux-dynamic/include/libavutil/attributes.h \
  /home/wpwl/vcpkg/installed/x64-linux-dynamic/include/libavutil/macros.h \
  /home/wpwl/vcpkg/installed/x64-linux-dynamic/include/libavutil/avconfig.h \
@@ -266,9 +245,25 @@ CMakeFiles/MyFFmpeg.dir/MyFFmpeg.cpp.o: \
  /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/stl_algo.h \
  /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/algorithmfwd.h \
  /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/stl_heap.h \
+ /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/stl_tempbuf.h \
+ /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/stl_construct.h \
  /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/uniform_int_dist.h \
  /home/wpwl/vcpkg/installed/x64-linux-dynamic/include/opencv2/core/cvstd.hpp \
+ /opt/rh/devtoolset-8/root/usr/include/c++/8/cstring \
  /home/wpwl/vcpkg/installed/x64-linux-dynamic/include/opencv2/core/cvstd_wrapper.hpp \
+ /opt/rh/devtoolset-8/root/usr/include/c++/8/memory \
+ /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/stl_uninitialized.h \
+ /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/stl_raw_storage_iter.h \
+ /opt/rh/devtoolset-8/root/usr/include/c++/8/ext/concurrence.h \
+ /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/unique_ptr.h \
+ /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/shared_ptr.h \
+ /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/shared_ptr_base.h \
+ /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/allocated_ptr.h \
+ /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/refwrap.h \
+ /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/shared_ptr_atomic.h \
+ /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/atomic_base.h \
+ /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/atomic_lockfree_defines.h \
+ /opt/rh/devtoolset-8/root/usr/include/c++/8/backward/auto_ptr.h \
  /home/wpwl/vcpkg/installed/x64-linux-dynamic/include/opencv2/core/neon_utils.hpp \
  /home/wpwl/vcpkg/installed/x64-linux-dynamic/include/opencv2/core/vsx_utils.hpp \
  /usr/include/assert.h \
@@ -280,6 +275,10 @@ CMakeFiles/MyFFmpeg.dir/MyFFmpeg.cpp.o: \
  /home/wpwl/vcpkg/installed/x64-linux-dynamic/include/opencv2/core/types.hpp \
  /opt/rh/devtoolset-8/root/usr/include/c++/8/cfloat \
  /opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/include/float.h \
+ /opt/rh/devtoolset-8/root/usr/include/c++/8/vector \
+ /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/stl_vector.h \
+ /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/stl_bvector.h \
+ /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/vector.tcc \
  /home/wpwl/vcpkg/installed/x64-linux-dynamic/include/opencv2/core/mat.hpp \
  /home/wpwl/vcpkg/installed/x64-linux-dynamic/include/opencv2/core/bufferpool.hpp \
  /home/wpwl/vcpkg/installed/x64-linux-dynamic/include/opencv2/core/mat.inl.hpp \
@@ -551,4 +550,7 @@ CMakeFiles/MyFFmpeg.dir/MyFFmpeg.cpp.o: \
  /opt/rh/devtoolset-8/root/usr/include/c++/8/random \
  /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/random.h \
  /opt/rh/devtoolset-8/root/usr/include/c++/8/x86_64-redhat-linux/bits/opt_random.h \
- /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/random.tcc
+ /opt/rh/devtoolset-8/root/usr/include/c++/8/bits/random.tcc \
+ /opt/rh/devtoolset-8/root/usr/include/c++/8/thread \
+ /opt/rh/devtoolset-8/root/usr/include/c++/8/shared_mutex \
+ /opt/rh/devtoolset-8/root/usr/include/c++/8/condition_variable

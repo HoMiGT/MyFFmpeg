@@ -6,13 +6,14 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake")
 
-set(CMAKE_BUILD_TYPE "Release")
+set(CMAKE_BUILD_TYPE Release)
 
 set(CMAKE_C_COMPILER "gcc")
 set(CMAKE_CXX_COMPILER "g++")
 set(PLATFORM "x64-linux")
 set(LIB_SUFFIX ".so")
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 ")
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -fPIC -O3 -pthread")
+
 
 set(CMAKE_INSTALL_PATH "~/Projects/MyFFmpeg")
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
@@ -27,7 +28,7 @@ set(quirc_DIR "$ENV{VCPKG_ROOT}/installed/x64-linux-dynamic/share/quirc")
 list(APPEND CMAKE_MODULE_PATH "${FFMPEG_DIR}")
 
 find_package(protobuf CONFIG REQUIRED)
-find_package(Python COMPONENTS Interpreter Development)
+find_package(Python3 COMPONENTS Interpreter Development)
 find_package(pybind11 CONFIG REQUIRED)
 find_package(OpenCV REQUIRED)
 find_package(FFMPEG REQUIRED)

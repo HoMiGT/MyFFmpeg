@@ -6,5 +6,5 @@ CXX_DEFINES = -DMyFFmpeg_EXPORTS -DPROTOBUF_USE_DLLS
 
 CXX_INCLUDES = -isystem /home/wpwl/vcpkg/installed/x64-linux-dynamic/include -isystem /home/wpwl/miniconda3/envs/py310/include/python3.10
 
-CXX_FLAGS = -O3 -DNDEBUG -O3  -std=gnu++17 -fPIC -fvisibility=hidden -flto -fno-fat-lto-objects
+CXX_FLAGS = -O3 -DNDEBUG -fPIC -O3 -pthread -std=gnu++17 -fPIC -fvisibility=hidden -flto -fno-fat-lto-objects
 
