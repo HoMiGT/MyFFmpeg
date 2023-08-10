@@ -1,6 +1,6 @@
 #include "MyFFmpeg.h"
 
-#include <string.h>
+#include <cstring>
 #include <random>
 #include <cmath>
 #include <thread>
@@ -27,9 +27,6 @@ MyFFmpeg::MyFFmpeg(const std::string& video_path,
 	av_dict_set(&m_format_options,"timetout","6000000",0);
 };
 
-MyFFmpeg::~MyFFmpeg() {
-	clean_up();
-}
 
 /// <summary>
 /// 波动式随机等待
@@ -45,22 +42,32 @@ std::chrono::milliseconds MyFFmpeg::sleep(int attempt)
 	return std::chrono::milliseconds(delay);
 }
 
-void MyFFmpeg::clean_up() {
+void MyFFmpeg::destruction() {
 	avformat_network_deinit();
+	std::cout<<"clean_up-1" << std::endl;
 	if (m_bgr_buffer) av_free(m_bgr_buffer);
 	m_bgr_buffer = nullptr;
+	std::cout<<"clean_up-2" << std::endl;
 	if (m_frame_bgr) av_frame_free(&m_frame_bgr);
 	m_frame_bgr = nullptr;
+	std::cout<<"clean_up-3" << std::endl;
 	if (m_frame) av_frame_free(&m_frame);
 	m_frame = nullptr;
+	std::cout<<"clean_up-4" << std::endl;
 	if (m_packet) av_packet_free(&m_packet);
 	m_packet = nullptr;
+	std::cout<<"clean_up-5" << std::endl;
 	if (m_codec_ctx) avcodec_free_context(&m_codec_ctx);
 	m_codec_ctx = nullptr;
+	std::cout<<"clean_up-6" << std::endl;
+	if (m_format_ctx && !m_is_closed_input) avformat_close_input(&m_format_ctx);
+	std::cout<<"clean_up-7" << std::endl;
 	if (m_format_ctx) avformat_free_context(m_format_ctx);
 	m_format_ctx = nullptr;
-	if (m_format_options) av_dict_free(&m_format_options);
+	std::cout<<"clean_up-8" << std::endl;
+	if (m_format_options && !m_is_free_options) av_dict_free(&m_format_options);
 	m_format_options = nullptr;
+	std::cout<<"clean_up-9" << std::endl;
 }
 
 int MyFFmpeg::initialize() noexcept {
@@ -73,6 +80,7 @@ int MyFFmpeg::initialize() noexcept {
 	m_open_start_time = static_cast<double>(cv::getTickCount()); 
 	do {
 		m_is_closed_input = false;
+		m_is_free_options = false;
 		m_format_ctx->interrupt_callback.callback = this->my_interrupt_callback;
 		m_format_ctx->interrupt_callback.opaque = this;
 		m_ret = avformat_open_input(&m_format_ctx, m_video_path.c_str(), m_input_format, &m_format_options);
@@ -85,7 +93,10 @@ int MyFFmpeg::initialize() noexcept {
 			m_is_closed_input = true;
 		}
 		m_format_ctx = nullptr;
-		if(m_format_options) av_dict_free(&m_format_options);
+		if(m_format_options) {
+			av_dict_free(&m_format_options);
+			m_is_free_options = true;
+		} 
 		m_format_options = nullptr;
 
 		m_format_ctx = avformat_alloc_context();
@@ -224,13 +235,6 @@ int MyFFmpeg::video_frames(py::array_t<uint8_t> arr,int arr_len){
 }
 
 
-int MyFFmpeg::close(){
-	if (m_format_ctx && !m_is_closed_input){
-		avformat_close_input(&m_format_ctx);
-	}
-	PKRT(MYFS_SUCCESS);
-}
-
 int MyFFmpeg::my_interrupt_callback(void *opaque){
 	MyFFmpeg *p = (MyFFmpeg *)opaque;
 	if(p){
@@ -242,13 +246,32 @@ int MyFFmpeg::my_interrupt_callback(void *opaque){
 }
 
 
-PYBIND11_MODULE(MyFFmpeg, m) {
-	py::class_<MyFFmpeg>(m, "MyFFmpeg")
-		.def(py::init<const std::string&, const double, const int, const int>())
-		.def("initialize", &MyFFmpeg::initialize)
-		.def("video_info", &MyFFmpeg::video_info)
-		.def("video_frames", &MyFFmpeg::video_frames)
-		// .def("decode", &MyFFmpeg::decode)
-		// .def("frames", &MyFFmpeg::frames, py::return_value_policy::move)
-		.def("close",&MyFFmpeg::close);
+//PYBIND11_MODULE(MyFFmpeg, m) {
+//	py::class_<MyFFmpeg>(m, "MyFFmpeg")
+//		.def(py::init<const std::string&, const double, const int, const int>())
+//		.def("initialize", &MyFFmpeg::initialize)
+//		.def("video_info", &MyFFmpeg::video_info)
+//		.def("video_frames", &MyFFmpeg::video_frames)
+//		.def("destruction",&MyFFmpeg::destruction);
+//}
+
+
+int main(){
+    MyFFmpeg f("./30_success.flv");
+    auto ret = f.initialize();
+    std::cout<<"ret:" << ret <<std::endl;
+    py::array_t<uint8_t> array({2});
+    auto ptr = array.mutable_data();
+    ptr[0] = 0;
+    ptr[1] = 0;
+    ret = f.video_info(array);
+    std::cout<<"video_info ret:"<< ret <<", width:" << ptr[0] << ", height:" << ptr[1] << std::endl;
+
+    std::vector<ssize_t> shape = {30,ptr[1],ptr[0],3};
+    py::array_t<uint8_t> frames(shape);
+    ret = f.video_frames(frames,30);
+    std::cout<<"ret: " << ret << std::endl;
+
+
+    return 0;
 }

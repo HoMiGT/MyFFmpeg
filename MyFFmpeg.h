@@ -25,7 +25,7 @@ namespace py = pybind11;
 #define MYERRCODE(e)  ((-e))
 
 // 包装结果 pack result
-#define PKRT(k)  return ( StateConvert.count(static_cast<int>(k)) ? StateConvert.at(static_cast<int>(k)) : 3999 ) 
+#define PKRT(k)  return ( StateConvert.count(static_cast<int>(k)) ? StateConvert.at(static_cast<int>(k)) : 3999 )
 
 /// ffmpeg version 5.1.2
 enum MyFFmpegState {
@@ -279,13 +279,13 @@ public:
 		int open_try_count = 15,
 		int packet_of_frame = 30
 	);
-	~MyFFmpeg();
+	~MyFFmpeg() =default;
 
 	int initialize() noexcept; // 初始化
 	int video_info(py::array_t<int> arr); // 获取视频的信息
 	int video_frames(py::array_t<uint8_t> arr,int arr_len); // 获取帧
 
-	int close(); // close input 
+	void destruction(); // 清理内存
 	static int my_interrupt_callback(void *opaque); // 定时检测打断
 
 private:
@@ -301,6 +301,7 @@ private:
 	int m_stream_index{ -1 };  // 默认视频缩影
 	bool m_is_suspend {false}; // 是否暂停视频读取
 	bool m_is_closed_input{false}; // 是否关闭了 input
+	bool m_is_free_options{false}; // 是否关闭了 options
 	bool m_open_flag {false}; // 打开标识 用来判断回调函数是否计算时间超时
 	double m_open_start_time{ 0 }; // 打开视频的开始时间 
 	const std::string m_video_path;  // 视频路径
@@ -314,7 +315,7 @@ private:
 	AVFrame* m_frame_bgr{ nullptr };  // bgr帧 av_frame_free
 	uint8_t* m_bgr_buffer{nullptr}; // bgr缓冲区 av_free
 
-	void clean_up(); // 清理内存
+	
 	void video_crop(uint8_t* arr,unsigned long step,int index); // 视频截取
 	std::chrono::milliseconds sleep(int index);
 

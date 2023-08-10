@@ -12,13 +12,12 @@ set(CMAKE_C_COMPILER "gcc")
 set(CMAKE_CXX_COMPILER "g++")
 set(PLATFORM "x64-linux")
 set(LIB_SUFFIX ".so")
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -fPIC -O3 -pthread")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -O3 -pthread -std=c++17")
 
 
 set(CMAKE_INSTALL_PATH "~/Projects/MyFFmpeg")
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 
-set(protobuf_DIR "$ENV{VCPKG_ROOT}/installed/x64-linux-dynamic/share/protobuf")
 set(Protobuf_DIR "$ENV{VCPKG_ROOT}/installed/x64-linux-dynamic/share/protobuf")
 set(OpenCV_DIR "$ENV{VCPKG_ROOT}/installed/x64-linux-dynamic/share/opencv4")
 set(FFMPEG_DIR "$ENV{VCPKG_ROOT}/installed/x64-linux-dynamic/share/ffmpeg")
@@ -27,7 +26,7 @@ set(quirc_DIR "$ENV{VCPKG_ROOT}/installed/x64-linux-dynamic/share/quirc")
 
 list(APPEND CMAKE_MODULE_PATH "${FFMPEG_DIR}")
 
-find_package(protobuf CONFIG REQUIRED)
+find_package(Protobuf CONFIG REQUIRED)
 find_package(Python3 COMPONENTS Interpreter Development)
 find_package(pybind11 CONFIG REQUIRED)
 find_package(OpenCV REQUIRED)
@@ -36,6 +35,7 @@ find_package(FFMPEG REQUIRED)
 
 include_directories(
     "$ENV{VCPKG_ROOT}/installed/x64-linux-dynamic/include"
+    "/home/wpwl/miniconda3/envs/py310/include/python3.10"
 )
 link_directories(
     "$ENV{VCPKG_ROOT}/installed/x64-linux-dynamic/lib"
@@ -54,9 +54,9 @@ target_link_libraries(MyFFmpeg
     protobuf::libprotobuf-lite
 )
 
-install(TARGETS MyFFmpeg
-        RUNTIME DESTINATION ${CMAKE_INSTALL_PATH}/lib
-        LIBRARY DESTINATION ${CMAKE_INSTALL_PATH}/lib)
+#install(TARGETS MyFFmpeg
+#        RUNTIME DESTINATION ${CMAKE_INSTALL_PATH}/lib
+#        LIBRARY DESTINATION ${CMAKE_INSTALL_PATH}/lib)
 
 # list(APPEND MY_SHARED_LIBS
 #     $ENV{VCPKG_ROOT}/installed/x64-linux-dynamic/lib/libavcodec.so.59.37.100

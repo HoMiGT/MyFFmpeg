@@ -318,6 +318,9 @@ MyFFmpeg_IS_TOP_LEVEL:STATIC=ON
 //Value Computed by CMake
 MyFFmpeg_SOURCE_DIR:STATIC=/home/wpwl/Projects/MyFFmpeg
 
+//The directory containing a CMake configuration file for Protobuf.
+Protobuf_DIR:PATH=/home/wpwl/vcpkg/installed/x64-linux/share/protobuf
+
 //Path to a program.
 Protobuf_PROTOC_EXECUTABLE:FILEPATH=/home/wpwl/vcpkg/installed/x64-linux/tools/protobuf/protoc
 
@@ -570,7 +573,7 @@ FIND_PACKAGE_MESSAGE_DETAILS_LibLZMA:INTERNAL=[optimized;/home/wpwl/vcpkg/instal
 //Details about finding OpenCV
 FIND_PACKAGE_MESSAGE_DETAILS_OpenCV:INTERNAL=[/home/wpwl/vcpkg/installed/x64-linux-dynamic][v4.7.0()]
 //Details about finding Protobuf
-FIND_PACKAGE_MESSAGE_DETAILS_Protobuf:INTERNAL=[/home/wpwl/vcpkg/installed/x64-linux/tools/protobuf/protoc][optimized;/home/wpwl/vcpkg/installed/x64-linux-dynamic/lib/libprotobuf.so.3.21.12.0;debug;/home/wpwl/vcpkg/installed/x64-linux-dynamic/debug/lib/libprotobufd.so.3.21.12.0][/home/wpwl/vcpkg/installed/x64-linux-dynamic/include][v3.21.12.0()]
+FIND_PACKAGE_MESSAGE_DETAILS_Protobuf:INTERNAL=[/home/wpwl/vcpkg/installed/x64-linux/tools/protobuf/protoc][optimized;/home/wpwl/vcpkg/installed/x64-linux/lib/libprotobuf.a;debug;/home/wpwl/vcpkg/installed/x64-linux/debug/lib/libprotobufd.a][/home/wpwl/vcpkg/installed/x64-linux/include][v3.21.12.0()]
 //Details about finding Python3
 FIND_PACKAGE_MESSAGE_DETAILS_Python3:INTERNAL=[/home/wpwl/miniconda3/envs/py310/bin/python3.10][/home/wpwl/miniconda3/envs/py310/include/python3.10][/home/wpwl/miniconda3/envs/py310/lib/libpython3.10.so][cfound components: Interpreter Development Development.Module Development.Embed ][v3.10.11()]
 //Details about finding TIFF
