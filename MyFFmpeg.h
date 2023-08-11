@@ -23,6 +23,7 @@ extern "C" {
 namespace py = pybind11;
 
 #define MYERRCODE(e)  ((-e))
+#define INBUF_SIZE 4096
 
 // 包装结果 pack result
 #define PKRT(k)  return ( StateConvert.count(static_cast<int>(k)) ? StateConvert.at(static_cast<int>(k)) : 3999 )
@@ -70,6 +71,7 @@ enum MyFFmpegState {
 	AV_INPUT_CHANGED = AVERROR_INPUT_CHANGED, // -1668179713 输入数据发生改变，需要重新配置
 	AV_OUTPUT_CHANGED = AVERROR_OUTPUT_CHANGED, // -1668179714 输出数据发生改变，需要重新配置
 
+    OTHER_ERROR_EINVAL2 = MYERRCODE(2), // -2 无效参数
 	OTHER_ERROR_ESRCH = MYERRCODE(ESRCH), // -3 线程不存在
 	OTHER_ERROR_EINTR = MYERRCODE(EINTR), // -4 被信号中断
 	OTHER_ERROR_EIO = MYERRCODE(EIO), // -5 输入 / 输出错误
@@ -270,11 +272,12 @@ static const std::map<int, int> StateConvert = {
 	{ static_cast<int>(OTHER_ERROR_EWOULDBLOCK),3213}, // -140 操作将阻塞
 	{static_cast<int>(OTHER_ERROR_CONTINUE),3214}, // -1001 继续读帧
 	{static_cast<int>(OTHER_ERROR_EINVAL),3215}, // -22 无效参数
+    {static_cast<int>(OTHER_ERROR_EINVAL2),3215} //
 };
 
 class MyFFmpeg {
 public:
-	MyFFmpeg(const std::string& video_path,
+	MyFFmpeg(const std::string video_path,
 		double crop_y_rate = 0.5,
 		int open_try_count = 15
 	);
@@ -283,6 +286,9 @@ public:
 	int initialize() noexcept; // 初始化
 	int video_info(py::array_t<int> arr); // 获取视频的信息
 	int video_frames(py::array_t<uint8_t> arr,int arr_len); // 获取帧
+
+//	int video_info(int arr[2]); // 获取视频的信息
+//	int video_frames(uint8_t* arr,int arr_len); // 获取帧
 
 	void destruction(); // 清理内存
 	static int my_interrupt_callback(void *opaque); // 定时检测打断
