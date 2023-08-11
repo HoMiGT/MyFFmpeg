@@ -276,8 +276,7 @@ class MyFFmpeg {
 public:
 	MyFFmpeg(const std::string& video_path,
 		double crop_y_rate = 0.5,
-		int open_try_count = 15,
-		int packet_of_frame = 30
+		int open_try_count = 15
 	);
 	~MyFFmpeg() =default;
 
@@ -292,7 +291,6 @@ private:
 	double m_crop_y_rate{ 0.5 };  // 默认高截取的比率
 	int m_open_try_count{ 0 };  // 打开尝试次数
 	int m_open_try_index{ 0 };  // 打开尝试索引
-	int m_packet_of_frames{ 30 };  // 一次读取的帧数
 	int m_crop_x{ 0 };  // 截取图片的x坐标
 	int m_crop_y{ 0 };  // 截图图片的y坐标
 	int m_crop_width{ 0 };  // 截取图片的宽度
@@ -313,6 +311,7 @@ private:
 	AVPacket* m_packet{ nullptr };  // 数据包 av_packet_free
 	AVFrame* m_frame{ nullptr };  // 帧 av_frame_free
 	AVFrame* m_frame_bgr{ nullptr };  // bgr帧 av_frame_free
+    SwsContext* m_sws_ctx {nullptr};
 	uint8_t* m_bgr_buffer{nullptr}; // bgr缓冲区 av_free
 
 	

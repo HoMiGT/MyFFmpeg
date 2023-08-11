@@ -6,13 +6,15 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake")
 
-set(CMAKE_BUILD_TYPE Release)
+#set(CMAKE_BUILD_TYPE Release)
+set(CMAKE_BUILD_TYPE Debug)
 
 set(CMAKE_C_COMPILER "gcc")
 set(CMAKE_CXX_COMPILER "g++")
 set(PLATFORM "x64-linux")
 set(LIB_SUFFIX ".so")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -O3 -pthread -std=c++17")
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -O3 -pthread -std=c++17")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -pthread -std=c++17")
 
 
 set(CMAKE_INSTALL_PATH "~/Projects/MyFFmpeg")

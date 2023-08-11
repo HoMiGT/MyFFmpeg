@@ -10,13 +10,11 @@ std::shared_mutex rwLock;
 
 MyFFmpeg::MyFFmpeg(const std::string& video_path,
 	double crop_y_rate,
-	int open_try_count,
-	int packet_of_frame
+	int open_try_count
 )
 	: m_video_path(video_path)
 	, m_crop_y_rate(crop_y_rate)
 	, m_open_try_count(open_try_count)
-	, m_packet_of_frames(packet_of_frame)
 {
 	av_dict_set(&m_format_options, "probesize", "10485760", 0); // 设置探测大小 10MB
 	av_dict_set(&m_format_options, "analyzeduration", "6000000", 0); // 设置分析时长 2s
@@ -43,31 +41,30 @@ std::chrono::milliseconds MyFFmpeg::sleep(int attempt)
 }
 
 void MyFFmpeg::destruction() {
-	avformat_network_deinit();
-	std::cout<<"clean_up-1" << std::endl;
-	if (m_bgr_buffer) av_free(m_bgr_buffer);
-	m_bgr_buffer = nullptr;
-	std::cout<<"clean_up-2" << std::endl;
-	if (m_frame_bgr) av_frame_free(&m_frame_bgr);
-	m_frame_bgr = nullptr;
-	std::cout<<"clean_up-3" << std::endl;
-	if (m_frame) av_frame_free(&m_frame);
-	m_frame = nullptr;
-	std::cout<<"clean_up-4" << std::endl;
-	if (m_packet) av_packet_free(&m_packet);
-	m_packet = nullptr;
-	std::cout<<"clean_up-5" << std::endl;
+	if (m_format_ctx && !m_is_closed_input) avformat_close_input(&m_format_ctx);
+
 	if (m_codec_ctx) avcodec_free_context(&m_codec_ctx);
 	m_codec_ctx = nullptr;
-	std::cout<<"clean_up-6" << std::endl;
-	if (m_format_ctx && !m_is_closed_input) avformat_close_input(&m_format_ctx);
-	std::cout<<"clean_up-7" << std::endl;
+
+	if (m_packet) av_packet_free(&m_packet);
+	m_packet = nullptr;
+
+	if (m_frame_bgr) av_frame_free(&m_frame_bgr);
+	m_frame_bgr = nullptr;
+	if (m_frame) av_frame_free(&m_frame);
+	m_frame = nullptr;
+
+	if (m_bgr_buffer) av_free(m_bgr_buffer);
+	m_bgr_buffer = nullptr;
+
+
 	if (m_format_ctx) avformat_free_context(m_format_ctx);
 	m_format_ctx = nullptr;
-	std::cout<<"clean_up-8" << std::endl;
+
 	if (m_format_options && !m_is_free_options) av_dict_free(&m_format_options);
 	m_format_options = nullptr;
-	std::cout<<"clean_up-9" << std::endl;
+
+	avformat_network_deinit();
 }
 
 int MyFFmpeg::initialize() noexcept {
@@ -175,6 +172,10 @@ int MyFFmpeg::initialize() noexcept {
 	m_crop_height = static_cast<int>(floor(m_codec_ctx->height * (m_crop_y_rate >= 1 ? 1 : m_crop_y_rate)));
 	m_crop_y = static_cast<int>(floor((m_codec_ctx->height - m_crop_height) / 2));
 	m_crop_x = 0;
+	auto video_width = m_codec_ctx->width;
+	auto video_height = m_codec_ctx->height;
+	auto src_format = static_cast<AVPixelFormat>(m_codec_ctx->sw_pix_fmt);
+	m_sws_ctx = sws_getContext(video_width, video_height, src_format, video_width, video_height, AV_PIX_FMT_BGR24, SWS_BILINEAR, nullptr, nullptr, nullptr);
 	PKRT(MYFS_SUCCESS);
 }
 
@@ -193,11 +194,9 @@ int MyFFmpeg::video_info(py::array_t<int> arr){
 void MyFFmpeg::video_crop(uint8_t* arr, unsigned long step,int index){
 	auto video_width = m_codec_ctx->width;
 	auto video_height = m_codec_ctx->height;
-	auto src_format = static_cast<AVPixelFormat>(m_codec_ctx->sw_pix_fmt);
-	auto m_sws_context = sws_getContext(video_width, video_height, src_format, video_width, video_height, AV_PIX_FMT_BGR24, SWS_BILINEAR, nullptr, nullptr, nullptr);
 	cv::Mat img(cv::Size(video_width, video_height), CV_8UC3, m_bgr_buffer);	
 	av_image_fill_arrays(m_frame_bgr->data, m_frame_bgr->linesize, img.data, AV_PIX_FMT_BGR24, video_width, video_height, 1);
-	sws_scale(m_sws_context, m_frame->data, m_frame->linesize, 0, video_height, m_frame_bgr->data, m_frame_bgr->linesize);
+	sws_scale(m_sws_ctx, m_frame->data, m_frame->linesize, 0, video_height, m_frame_bgr->data, m_frame_bgr->linesize);
 	cv::Mat crop = img(cv::Rect(m_crop_x, m_crop_y, m_crop_width, m_crop_height));
 	memcpy(arr+step*index, crop.data, step ); 
 }
@@ -271,6 +270,13 @@ int main(){
     py::array_t<uint8_t> frames(shape);
     ret = f.video_frames(frames,30);
     std::cout<<"ret: " << ret << std::endl;
+
+	uint8_t* free_array = array.mutable_data();
+	delete[] free_array;
+
+	uint8_t* free_frames = frames.mutable_data();
+	delete[] free_frames;
+
 
 
     return 0;
