@@ -277,10 +277,7 @@ static const std::map<int, int> StateConvert = {
 
 class MyFFmpeg {
 public:
-	MyFFmpeg(const std::string video_path,
-		double crop_y_rate = 0.5,
-		int open_try_count = 15
-	);
+	MyFFmpeg(const std::string video_path,const std::string video_size,double crop_y_rate,int open_try_count,const std::string pixel_format);
 	~MyFFmpeg() =default;
 
 	int initialize() noexcept; // 初始化
@@ -297,6 +294,8 @@ private:
 	double m_crop_y_rate{ 0.5 };  // 默认高截取的比率
 	int m_open_try_count{ 0 };  // 打开尝试次数
 	int m_open_try_index{ 0 };  // 打开尝试索引
+    std::string m_video_size; // 视频大小
+    std::string m_pixel_format; // 视频格式
 	int m_crop_x{ 0 };  // 截取图片的x坐标
 	int m_crop_y{ 0 };  // 截图图片的y坐标
 	int m_crop_width{ 0 };  // 截取图片的宽度
