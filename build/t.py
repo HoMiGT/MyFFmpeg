@@ -7,8 +7,7 @@ video_path ="../0430.flv"
 
 for i in range(4):
 
-    obj = MyFFmpeg.MyFFmpeg(video_path,0.5,15,30)
-
+    obj = MyFFmpeg.MyFFmpeg(video_path)
     status = obj.initialize()
     print(status)
     if status != 3100:

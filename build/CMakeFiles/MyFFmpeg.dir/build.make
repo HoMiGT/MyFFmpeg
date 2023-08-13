@@ -106,9 +106,8 @@ MyFFmpeg.cpython-310-x86_64-linux-gnu.so: /home/wpwl/vcpkg/installed/x64-linux-d
 MyFFmpeg.cpython-310-x86_64-linux-gnu.so: /home/wpwl/vcpkg/installed/x64-linux-dynamic/lib/libswresample.so
 MyFFmpeg.cpython-310-x86_64-linux-gnu.so: /home/wpwl/vcpkg/installed/x64-linux-dynamic/lib/libswscale.so
 MyFFmpeg.cpython-310-x86_64-linux-gnu.so: /home/wpwl/vcpkg/installed/x64-linux-dynamic/lib/libavutil.so
-MyFFmpeg.cpython-310-x86_64-linux-gnu.so: /home/wpwl/vcpkg/installed/x64-linux/lib/libprotoc.a
-MyFFmpeg.cpython-310-x86_64-linux-gnu.so: /home/wpwl/vcpkg/installed/x64-linux/lib/libprotobuf.a
-MyFFmpeg.cpython-310-x86_64-linux-gnu.so: /home/wpwl/vcpkg/installed/x64-linux/lib/libprotobuf-lite.a
+MyFFmpeg.cpython-310-x86_64-linux-gnu.so: /home/wpwl/vcpkg/installed/x64-linux-dynamic/lib/libprotoc.so.3.21.12.0
+MyFFmpeg.cpython-310-x86_64-linux-gnu.so: /home/wpwl/vcpkg/installed/x64-linux-dynamic/lib/libprotobuf-lite.so.3.21.12.0
 MyFFmpeg.cpython-310-x86_64-linux-gnu.so: /home/wpwl/vcpkg/installed/x64-linux-dynamic/lib/libopencv_imgcodecs4.so.4.7.0
 MyFFmpeg.cpython-310-x86_64-linux-gnu.so: /home/wpwl/vcpkg/installed/x64-linux-dynamic/lib/libopencv_calib3d4.so.4.7.0
 MyFFmpeg.cpython-310-x86_64-linux-gnu.so: /home/wpwl/vcpkg/installed/x64-linux-dynamic/lib/libopencv_dnn4.so.4.7.0
@@ -116,7 +115,7 @@ MyFFmpeg.cpython-310-x86_64-linux-gnu.so: /home/wpwl/vcpkg/installed/x64-linux-d
 MyFFmpeg.cpython-310-x86_64-linux-gnu.so: /home/wpwl/vcpkg/installed/x64-linux-dynamic/lib/libopencv_flann4.so.4.7.0
 MyFFmpeg.cpython-310-x86_64-linux-gnu.so: /home/wpwl/vcpkg/installed/x64-linux-dynamic/lib/libopencv_imgproc4.so.4.7.0
 MyFFmpeg.cpython-310-x86_64-linux-gnu.so: /home/wpwl/vcpkg/installed/x64-linux-dynamic/lib/libopencv_core4.so.4.7.0
-MyFFmpeg.cpython-310-x86_64-linux-gnu.so: /home/wpwl/vcpkg/installed/x64-linux/lib/libprotobuf.a
+MyFFmpeg.cpython-310-x86_64-linux-gnu.so: /home/wpwl/vcpkg/installed/x64-linux-dynamic/lib/libprotobuf.so.3.21.12.0
 MyFFmpeg.cpython-310-x86_64-linux-gnu.so: CMakeFiles/MyFFmpeg.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX shared module MyFFmpeg.cpython-310-x86_64-linux-gnu.so"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/MyFFmpeg.dir/link.txt --verbose=$(VERBOSE)

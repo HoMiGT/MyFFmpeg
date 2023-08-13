@@ -8,27 +8,29 @@
 
 std::shared_mutex rwLock;
 
-inline void set_options(AVDictionary* format_options,const std::string& video_size,const std::string& pixel_format){
+inline void set_options(AVDictionary* format_options,const std::string& video_size,int timeout, const std::string& pixel_format){
+    auto timeout_str = std::to_string(timeout*1000);
     av_dict_set(&format_options, "video_size", video_size.c_str(), 0);
     av_dict_set(&format_options, "pixel_format", pixel_format.c_str(), 0);
     av_dict_set(&format_options, "probesize", "10485760", 0); // 设置探测大小 10MB
-    av_dict_set(&format_options, "analyzeduration", "3000000", 0); // 设置分析时长 2s
+    av_dict_set(&format_options, "analyzeduration", timeout_str.c_str(), 0); // 设置分析时长 2s
     av_dict_set(&format_options, "rtsp_transport", "tcp", 0);
     av_dict_set(&format_options, "max_delay", "250", 0);
-    av_dict_set(&format_options, "max_analyze_duration", "3000000", 0);  // 设置最大分析时长 2s
-    av_dict_set(&format_options, "stimeout", "3000000", 0); // 设置超时时间 2s
-    av_dict_set(&format_options,"timetout","3000000",0);
+    av_dict_set(&format_options, "max_analyze_duration", timeout_str.c_str(), 0);  // 设置最大分析时长 2s
+    av_dict_set(&format_options, "stimeout", timeout_str.c_str(), 0); // 设置超时时间 2s
+    av_dict_set(&format_options,"timetout",timeout_str.c_str(),0);
 }
 
-MyFFmpeg::MyFFmpeg(const std::string video_path,const std::string video_size,double crop_y_rate,int open_try_count,const std::string pixel_format)
+MyFFmpeg::MyFFmpeg(const std::string video_path,const std::string video_size,int timeout,double crop_y_rate,int open_try_count,const std::string pixel_format)
 	: m_video_path(video_path)
     , m_video_size(video_size)
+    , m_timeout(timeout)
 	, m_crop_y_rate(crop_y_rate)
 	, m_open_try_count(open_try_count)
     , m_pixel_format(pixel_format)
 {
     av_log(nullptr,AV_LOG_INFO,"video_size:%s",video_size.c_str());
-    set_options(m_format_options,m_video_size,m_pixel_format);
+    set_options(m_format_options,m_video_size,m_timeout, m_pixel_format);
 };
 
 
@@ -96,9 +98,15 @@ int MyFFmpeg::initialize() noexcept {
             std::cout<<" a 2" << std::endl;
             if (!m_ret) {
                 std::cout<<" a 3" << std::endl;
+                m_stream_index = -1;
                 m_ret = avformat_find_stream_info(m_format_ctx, nullptr);
                 std::cout<<" a 4" << std::endl;
-                if(!m_ret) break;
+                for (int i = 0; i < m_format_ctx->nb_streams; i++)
+                    if (m_format_ctx->streams[i]->codecpar->codec_type == AVMEDIA_TYPE_VIDEO) {
+                        m_stream_index = i;
+                        break;
+                    }
+                if (m_stream_index >= 0) break;
             };
 
             if(m_format_ctx){
@@ -117,40 +125,16 @@ int MyFFmpeg::initialize() noexcept {
             m_format_options = nullptr;
 
             m_format_ctx = avformat_alloc_context();
-            set_options(m_format_options,m_video_size,m_pixel_format);
+            set_options(m_format_options,m_video_size,m_timeout,m_pixel_format);
 
             delay = sleep(m_open_try_index);
             std::this_thread::sleep_for(delay);
-            m_open_try_index++;
-        } while (m_open_try_index < m_open_try_count);
-        std::cout<<" a 6" << std::endl;
+        } while (m_open_try_index++ < m_open_try_count);
         if (m_ret) PKRT(m_ret);
+        if (m_stream_index == -1) PKRT(INIT_ERR_FIND_DECODER);
         m_open_flag = true;
-//        int try_index = 0;
-//        do {
-//            std::cout<<" b 1" << std::endl;
-//            m_ret = avformat_find_stream_info(m_format_ctx, nullptr);
-//            std::cout<<" b 2" << std::endl;
-//            if (m_ret >= 0) break;
-//            try_index++;
-//        } while (try_index < 2);
-//        if (m_ret < 0) PKRT(m_ret);
-         av_dump_format(m_format_ctx, -1, m_video_path.c_str(), 0);
-//        do {
-//            std::cout<<" c 1" << std::endl;
-//            m_ret = av_find_best_stream(m_format_ctx, AVMEDIA_TYPE_VIDEO, -1, -1, nullptr, 0);
-//            std::cout<<" c 2" << std::endl;
-//            if (m_ret >= 0) break;
-//            try_index++;
-//        } while (try_index < 2);
-//        if (m_ret < 0) PKRT(m_ret);
-
-        for (int i = 0; i < m_format_ctx->nb_streams; i++)
-            if (m_format_ctx->streams[i]->codecpar->codec_type == AVMEDIA_TYPE_VIDEO) {
-                m_stream_index = i;
-                break;
-            }
-        if (m_stream_index==-1) PKRT(INIT_ERR_FIND_DECODER);
+        
+        av_dump_format(m_format_ctx, -1, m_video_path.c_str(), 0);
 
         m_codec = avcodec_find_decoder(m_format_ctx->streams[m_stream_index]->codecpar->codec_id);
         if (!m_codec) PKRT(INIT_ERR_FIND_DECODER);
@@ -276,17 +260,12 @@ int MyFFmpeg::my_interrupt_callback(void *opaque){
 	return 0;
 }
 
-//: m_video_path(video_path)
-//, m_crop_y_rate(crop_y_rate)
-//, m_open_try_count(open_try_count)
-//, m_video_size(video_size)
-//, m_pixel_format(pixel_format)
-
 PYBIND11_MODULE(MyFFmpeg, m) {
 	py::class_<MyFFmpeg>(m, "MyFFmpeg")
-		.def(py::init<const std::string, const std::string, const double, const int,const std::string>(),
+		.def(py::init<const std::string, const std::string,const int, const double, const int,const std::string>(),
 		        py::arg("video_path"),
                 py::arg("video_size") ="540x960",
+                py::arg("timeout") = 2000,
                 py::arg("crop_height_rate")=0.5,
                 py::arg("open_try_count") = 5,
                 py::arg("pixel_format")="yuv420p",

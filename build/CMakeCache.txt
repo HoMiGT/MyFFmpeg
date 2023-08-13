@@ -318,8 +318,17 @@ MyFFmpeg_IS_TOP_LEVEL:STATIC=ON
 //Value Computed by CMake
 MyFFmpeg_SOURCE_DIR:STATIC=/home/wpwl/Projects/MyFFmpeg
 
-//The directory containing a CMake configuration file for Protobuf.
-Protobuf_DIR:PATH=/home/wpwl/vcpkg/installed/x64-linux/share/protobuf
+//Path to a program.
+PYTHON_EXECUTABLE:FILEPATH=/home/wpwl/miniconda3/envs/py310/bin/python
+
+//Path to a file.
+PYTHON_INCLUDE_DIR:PATH=/home/wpwl/miniconda3/envs/py310/include/python3.10
+
+//Path to a library.
+PYTHON_LIBRARY:FILEPATH=/home/wpwl/miniconda3/envs/py310/lib/libpython3.10.so
+
+//Path to a library.
+PYTHON_LIBRARY_DEBUG:FILEPATH=PYTHON_LIBRARY_DEBUG-NOTFOUND
 
 //Path to a program.
 Protobuf_PROTOC_EXECUTABLE:FILEPATH=/home/wpwl/vcpkg/installed/x64-linux/tools/protobuf/protoc
@@ -462,11 +471,7 @@ CMAKE_GENERATOR_PLATFORM:INTERNAL=
 //Name of generator toolset.
 CMAKE_GENERATOR_TOOLSET:INTERNAL=
 //Test CMAKE_HAVE_LIBC_PTHREAD
-CMAKE_HAVE_LIBC_PTHREAD:INTERNAL=
-//Have library pthreads
-CMAKE_HAVE_PTHREADS_CREATE:INTERNAL=
-//Have library pthread
-CMAKE_HAVE_PTHREAD_CREATE:INTERNAL=1
+CMAKE_HAVE_LIBC_PTHREAD:INTERNAL=1
 //Source directory with the top level CMakeLists.txt file for this
 // project
 CMAKE_HOME_DIRECTORY:INTERNAL=/home/wpwl/Projects/MyFFmpeg
@@ -573,9 +578,13 @@ FIND_PACKAGE_MESSAGE_DETAILS_LibLZMA:INTERNAL=[optimized;/home/wpwl/vcpkg/instal
 //Details about finding OpenCV
 FIND_PACKAGE_MESSAGE_DETAILS_OpenCV:INTERNAL=[/home/wpwl/vcpkg/installed/x64-linux-dynamic][v4.7.0()]
 //Details about finding Protobuf
-FIND_PACKAGE_MESSAGE_DETAILS_Protobuf:INTERNAL=[/home/wpwl/vcpkg/installed/x64-linux/tools/protobuf/protoc][optimized;/home/wpwl/vcpkg/installed/x64-linux/lib/libprotobuf.a;debug;/home/wpwl/vcpkg/installed/x64-linux/debug/lib/libprotobufd.a][/home/wpwl/vcpkg/installed/x64-linux/include][v3.21.12.0()]
+FIND_PACKAGE_MESSAGE_DETAILS_Protobuf:INTERNAL=[/home/wpwl/vcpkg/installed/x64-linux/tools/protobuf/protoc][optimized;/home/wpwl/vcpkg/installed/x64-linux-dynamic/lib/libprotobuf.so.3.21.12.0;debug;/home/wpwl/vcpkg/installed/x64-linux-dynamic/debug/lib/libprotobufd.so.3.21.12.0][/home/wpwl/vcpkg/installed/x64-linux-dynamic/include][v3.21.12.0()]
 //Details about finding Python3
 FIND_PACKAGE_MESSAGE_DETAILS_Python3:INTERNAL=[/home/wpwl/miniconda3/envs/py310/bin/python3.10][/home/wpwl/miniconda3/envs/py310/include/python3.10][/home/wpwl/miniconda3/envs/py310/lib/libpython3.10.so][cfound components: Interpreter Development Development.Module Development.Embed ][v3.10.11()]
+//Details about finding PythonInterp
+FIND_PACKAGE_MESSAGE_DETAILS_PythonInterp:INTERNAL=[/home/wpwl/miniconda3/envs/py310/bin/python][v3.10.11()]
+//Details about finding PythonLibs
+FIND_PACKAGE_MESSAGE_DETAILS_PythonLibs:INTERNAL=[/home/wpwl/miniconda3/envs/py310/lib/libpython3.10.so][/home/wpwl/miniconda3/envs/py310/include/python3.10][v3.10.11()]
 //Details about finding TIFF
 FIND_PACKAGE_MESSAGE_DETAILS_TIFF:INTERNAL=[optimized;/home/wpwl/vcpkg/installed/x64-linux/lib/libtiff.a;debug;/home/wpwl/vcpkg/installed/x64-linux/debug/lib/libtiffd.a][/home/wpwl/vcpkg/installed/x64-linux/include][c ][v4.5.1()]
 //Details about finding Threads
@@ -601,11 +610,17 @@ LIBLZMA_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
 LIBLZMA_LIBRARY_RELEASE-ADVANCED:INTERNAL=1
 //Python executable during the last CMake run
 PYBIND11_PYTHON_EXECUTABLE_LAST:INTERNAL=/home/wpwl/miniconda3/envs/py310/bin/python3.10
+//ADVANCED property for variable: PYTHON_EXECUTABLE
+PYTHON_EXECUTABLE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: PYTHON_INCLUDE_DIR
+PYTHON_INCLUDE_DIR-ADVANCED:INTERNAL=1
 //Python debug status
 PYTHON_IS_DEBUG:INTERNAL=0
+//ADVANCED property for variable: PYTHON_LIBRARY
+PYTHON_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: PYTHON_LIBRARY_DEBUG
+PYTHON_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
 PYTHON_MODULE_EXTENSION:INTERNAL=.cpython-310-x86_64-linux-gnu.so
-//Result of TRY_COMPILE
-THREADS_HAVE_PTHREAD_ARG:INTERNAL=TRUE
 //ADVANCED property for variable: TIFF_INCLUDE_DIR
 TIFF_INCLUDE_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: TIFF_LIBRARY_DEBUG
@@ -635,8 +650,8 @@ _CMAKE_LINKER_PUSHPOP_STATE_SUPPORTED:INTERNAL=TRUE
 _Python:INTERNAL=Python3
 //Compiler reason failure
 _Python3_Compiler_REASON_FAILURE:INTERNAL=
-_Python3_DEVELOPMENT_EMBED_SIGNATURE:INTERNAL=cde7800d6ef6ba05d0b060700acb1b06
-_Python3_DEVELOPMENT_MODULE_SIGNATURE:INTERNAL=4e825badf79ed2cb347556f52063ad7e
+_Python3_DEVELOPMENT_EMBED_SIGNATURE:INTERNAL=22ccbff4ea5d4fd06016f9634c58c233
+_Python3_DEVELOPMENT_MODULE_SIGNATURE:INTERNAL=77fdf68413ca4191af4a0d80d58b4ecc
 //Development reason failure
 _Python3_Development_REASON_FAILURE:INTERNAL=
 //Path to a program.
@@ -645,7 +660,7 @@ _Python3_EXECUTABLE:INTERNAL=/home/wpwl/miniconda3/envs/py310/bin/python3.10
 _Python3_INCLUDE_DIR:INTERNAL=/home/wpwl/miniconda3/envs/py310/include/python3.10
 //Python3 Properties
 _Python3_INTERPRETER_PROPERTIES:INTERNAL=Python;3;10;11;64;;cpython-310-x86_64-linux-gnu;abi3;/home/wpwl/miniconda3/envs/py310/lib/python3.10;/home/wpwl/miniconda3/envs/py310/lib/python3.10;/home/wpwl/miniconda3/envs/py310/lib/python3.10/site-packages;/home/wpwl/miniconda3/envs/py310/lib/python3.10/site-packages
-_Python3_INTERPRETER_SIGNATURE:INTERNAL=95b446fd0d18c598df8c0f171311f15c
+_Python3_INTERPRETER_SIGNATURE:INTERNAL=aeb966aabb8ebf4044456afbf0147035
 //Path to a library.
 _Python3_LIBRARY_RELEASE:INTERNAL=/home/wpwl/miniconda3/envs/py310/lib/libpython3.10.so
 //NumPy reason failure

@@ -39,8 +39,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-tXECUa"
-      binary: "/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-tXECUa"
+      source: "/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-i1CGIX"
+      binary: "/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-i1CGIX"
     cmakeVariables:
       CMAKE_CXX_FLAGS: ""
       CMAKE_CXX_FLAGS_DEBUG: "-g"
@@ -52,21 +52,21 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: '/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-tXECUa'
+        Change Dir: '/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-i1CGIX'
         
-        Run Build Command(s): /usr/local/cmake/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_b5421/fast
-        /usr/bin/gmake  -f CMakeFiles/cmTC_b5421.dir/build.make CMakeFiles/cmTC_b5421.dir/build
-        gmake[1]: Entering directory `/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-tXECUa'
-        Building CXX object CMakeFiles/cmTC_b5421.dir/CMakeCXXCompilerABI.cpp.o
-        /usr/bin/c++   -v -o CMakeFiles/cmTC_b5421.dir/CMakeCXXCompilerABI.cpp.o -c /usr/local/cmake/share/cmake-3.27/Modules/CMakeCXXCompilerABI.cpp
+        Run Build Command(s): /usr/local/cmake/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_023fd/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_023fd.dir/build.make CMakeFiles/cmTC_023fd.dir/build
+        gmake[1]: Entering directory `/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-i1CGIX'
+        Building CXX object CMakeFiles/cmTC_023fd.dir/CMakeCXXCompilerABI.cpp.o
+        /usr/bin/c++   -v -o CMakeFiles/cmTC_023fd.dir/CMakeCXXCompilerABI.cpp.o -c /usr/local/cmake/share/cmake-3.27/Modules/CMakeCXXCompilerABI.cpp
         Using built-in specs.
         COLLECT_GCC=/usr/bin/c++
         Target: x86_64-redhat-linux
         Configured with: ../configure --enable-bootstrap --enable-languages=c,c++,fortran,lto --prefix=/opt/rh/devtoolset-8/root/usr --mandir=/opt/rh/devtoolset-8/root/usr/share/man --infodir=/opt/rh/devtoolset-8/root/usr/share/info --with-bugurl=http://bugzilla.redhat.com/bugzilla --enable-shared --enable-threads=posix --enable-checking=release --enable-multilib --with-system-zlib --enable-__cxa_atexit --disable-libunwind-exceptions --enable-gnu-unique-object --enable-linker-build-id --with-gcc-major-version-only --with-linker-hash-style=gnu --with-default-libstdcxx-abi=gcc4-compatible --enable-plugin --enable-initfini-array --with-isl=/builddir/build/BUILD/gcc-8.3.1-20190311/obj-x86_64-redhat-linux/isl-install --disable-libmpx --enable-gnu-indirect-function --with-tune=generic --with-arch_32=x86-64 --build=x86_64-redhat-linux
         Thread model: posix
         gcc version 8.3.1 20190311 (Red Hat 8.3.1-3) (GCC) 
-        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_b5421.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
-         /opt/rh/devtoolset-8/root/usr/libexec/gcc/x86_64-redhat-linux/8/cc1plus -quiet -v -D_GNU_SOURCE /usr/local/cmake/share/cmake-3.27/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_b5421.dir/CMakeCXXCompilerABI.cpp.o -version -o /tmp/ccAeqJve.s
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_023fd.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+         /opt/rh/devtoolset-8/root/usr/libexec/gcc/x86_64-redhat-linux/8/cc1plus -quiet -v -D_GNU_SOURCE /usr/local/cmake/share/cmake-3.27/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_023fd.dir/CMakeCXXCompilerABI.cpp.o -version -o /tmp/ccsc31rW.s
         GNU C++14 (GCC) version 8.3.1 20190311 (Red Hat 8.3.1-3) (x86_64-redhat-linux)
         	compiled by GNU C version 8.3.1 20190311 (Red Hat 8.3.1-3), GMP version 6.0.0, MPFR version 3.1.1, MPC version 1.0.1, isl version isl-0.16.1-GMP
         
@@ -88,15 +88,15 @@ events:
         
         GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
         Compiler executable checksum: 7f7bfebac998692a8c6049d3da01a54f
-        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_b5421.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
-         /opt/rh/devtoolset-8/root/usr/libexec/gcc/x86_64-redhat-linux/8/as -v --64 -o CMakeFiles/cmTC_b5421.dir/CMakeCXXCompilerABI.cpp.o /tmp/ccAeqJve.s
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_023fd.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+         /opt/rh/devtoolset-8/root/usr/libexec/gcc/x86_64-redhat-linux/8/as -v --64 -o CMakeFiles/cmTC_023fd.dir/CMakeCXXCompilerABI.cpp.o /tmp/ccsc31rW.s
         GNU assembler version 2.30 (x86_64-redhat-linux) using BFD version version 2.30-55.el7.2
         COMPILER_PATH=/opt/rh/devtoolset-8/root/usr/libexec/gcc/x86_64-redhat-linux/8/:/opt/rh/devtoolset-8/root/usr/libexec/gcc/x86_64-redhat-linux/8/:/opt/rh/devtoolset-8/root/usr/libexec/gcc/x86_64-redhat-linux/:/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/:/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/
-        LIBRARY_PATH=/usr/lib64/../lib64/:/usr/lib64/../lib64/:/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/:/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:./:/usr/lib64/:/usr/lib64/:/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/../../../:/lib/:/usr/lib/
-        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_b5421.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
-        Linking CXX executable cmTC_b5421
-        /usr/local/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b5421.dir/link.txt --verbose=1
-        /usr/bin/c++  -v CMakeFiles/cmTC_b5421.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_b5421 
+        LIBRARY_PATH=/usr/lib64/../lib64/:/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/:/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:./:/usr/lib64/:/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_023fd.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+        Linking CXX executable cmTC_023fd
+        /usr/local/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_023fd.dir/link.txt --verbose=1
+        /usr/bin/c++  -v CMakeFiles/cmTC_023fd.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_023fd 
         Using built-in specs.
         COLLECT_GCC=/usr/bin/c++
         COLLECT_LTO_WRAPPER=/opt/rh/devtoolset-8/root/usr/libexec/gcc/x86_64-redhat-linux/8/lto-wrapper
@@ -105,11 +105,11 @@ events:
         Thread model: posix
         gcc version 8.3.1 20190311 (Red Hat 8.3.1-3) (GCC) 
         COMPILER_PATH=/opt/rh/devtoolset-8/root/usr/libexec/gcc/x86_64-redhat-linux/8/:/opt/rh/devtoolset-8/root/usr/libexec/gcc/x86_64-redhat-linux/8/:/opt/rh/devtoolset-8/root/usr/libexec/gcc/x86_64-redhat-linux/:/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/:/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/
-        LIBRARY_PATH=/usr/lib64/../lib64/:/usr/lib64/../lib64/:/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/:/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:./:/usr/lib64/:/usr/lib64/:/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/../../../:/lib/:/usr/lib/
-        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_b5421' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
-         /opt/rh/devtoolset-8/root/usr/libexec/gcc/x86_64-redhat-linux/8/collect2 -plugin /opt/rh/devtoolset-8/root/usr/libexec/gcc/x86_64-redhat-linux/8/liblto_plugin.so -plugin-opt=/opt/rh/devtoolset-8/root/usr/libexec/gcc/x86_64-redhat-linux/8/lto-wrapper -plugin-opt=-fresolution=/tmp/ccJCgX1g.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --no-add-needed --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_b5421 /usr/lib64/../lib64/crt1.o /usr/lib64/../lib64/crti.o /opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/crtbegin.o -L/usr/lib64/../lib64 -L/usr/lib64/../lib64 -L/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8 -L/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L. -L/usr/lib64 -L/usr/lib64 -L/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/../../.. CMakeFiles/cmTC_b5421.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/crtend.o /usr/lib64/../lib64/crtn.o
-        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_b5421' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
-        gmake[1]: Leaving directory `/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-tXECUa'
+        LIBRARY_PATH=/usr/lib64/../lib64/:/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/:/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:./:/usr/lib64/:/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_023fd' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+         /opt/rh/devtoolset-8/root/usr/libexec/gcc/x86_64-redhat-linux/8/collect2 -plugin /opt/rh/devtoolset-8/root/usr/libexec/gcc/x86_64-redhat-linux/8/liblto_plugin.so -plugin-opt=/opt/rh/devtoolset-8/root/usr/libexec/gcc/x86_64-redhat-linux/8/lto-wrapper -plugin-opt=-fresolution=/tmp/cc1xLM3Z.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --no-add-needed --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_023fd /usr/lib64/../lib64/crt1.o /usr/lib64/../lib64/crti.o /opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/crtbegin.o -L/usr/lib64/../lib64 -L/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8 -L/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L. -L/usr/lib64 -L/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/../../.. CMakeFiles/cmTC_023fd.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/crtend.o /usr/lib64/../lib64/crtn.o
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_023fd' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+        gmake[1]: Leaving directory `/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-i1CGIX'
         
       exitCode: 0
   -
@@ -149,21 +149,21 @@ events:
     message: |
       Parsed CXX implicit link information:
         link line regex: [^( *|.*[/\\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
-        ignore line: [Change Dir: '/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-tXECUa']
+        ignore line: [Change Dir: '/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-i1CGIX']
         ignore line: []
-        ignore line: [Run Build Command(s): /usr/local/cmake/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_b5421/fast]
-        ignore line: [/usr/bin/gmake  -f CMakeFiles/cmTC_b5421.dir/build.make CMakeFiles/cmTC_b5421.dir/build]
-        ignore line: [gmake[1]: Entering directory `/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-tXECUa']
-        ignore line: [Building CXX object CMakeFiles/cmTC_b5421.dir/CMakeCXXCompilerABI.cpp.o]
-        ignore line: [/usr/bin/c++   -v -o CMakeFiles/cmTC_b5421.dir/CMakeCXXCompilerABI.cpp.o -c /usr/local/cmake/share/cmake-3.27/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [Run Build Command(s): /usr/local/cmake/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_023fd/fast]
+        ignore line: [/usr/bin/gmake  -f CMakeFiles/cmTC_023fd.dir/build.make CMakeFiles/cmTC_023fd.dir/build]
+        ignore line: [gmake[1]: Entering directory `/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-i1CGIX']
+        ignore line: [Building CXX object CMakeFiles/cmTC_023fd.dir/CMakeCXXCompilerABI.cpp.o]
+        ignore line: [/usr/bin/c++   -v -o CMakeFiles/cmTC_023fd.dir/CMakeCXXCompilerABI.cpp.o -c /usr/local/cmake/share/cmake-3.27/Modules/CMakeCXXCompilerABI.cpp]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=/usr/bin/c++]
         ignore line: [Target: x86_64-redhat-linux]
         ignore line: [Configured with: ../configure --enable-bootstrap --enable-languages=c c++ fortran lto --prefix=/opt/rh/devtoolset-8/root/usr --mandir=/opt/rh/devtoolset-8/root/usr/share/man --infodir=/opt/rh/devtoolset-8/root/usr/share/info --with-bugurl=http://bugzilla.redhat.com/bugzilla --enable-shared --enable-threads=posix --enable-checking=release --enable-multilib --with-system-zlib --enable-__cxa_atexit --disable-libunwind-exceptions --enable-gnu-unique-object --enable-linker-build-id --with-gcc-major-version-only --with-linker-hash-style=gnu --with-default-libstdcxx-abi=gcc4-compatible --enable-plugin --enable-initfini-array --with-isl=/builddir/build/BUILD/gcc-8.3.1-20190311/obj-x86_64-redhat-linux/isl-install --disable-libmpx --enable-gnu-indirect-function --with-tune=generic --with-arch_32=x86-64 --build=x86_64-redhat-linux]
         ignore line: [Thread model: posix]
         ignore line: [gcc version 8.3.1 20190311 (Red Hat 8.3.1-3) (GCC) ]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_b5421.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
-        ignore line: [ /opt/rh/devtoolset-8/root/usr/libexec/gcc/x86_64-redhat-linux/8/cc1plus -quiet -v -D_GNU_SOURCE /usr/local/cmake/share/cmake-3.27/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_b5421.dir/CMakeCXXCompilerABI.cpp.o -version -o /tmp/ccAeqJve.s]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_023fd.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+        ignore line: [ /opt/rh/devtoolset-8/root/usr/libexec/gcc/x86_64-redhat-linux/8/cc1plus -quiet -v -D_GNU_SOURCE /usr/local/cmake/share/cmake-3.27/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_023fd.dir/CMakeCXXCompilerABI.cpp.o -version -o /tmp/ccsc31rW.s]
         ignore line: [GNU C++14 (GCC) version 8.3.1 20190311 (Red Hat 8.3.1-3) (x86_64-redhat-linux)]
         ignore line: [	compiled by GNU C version 8.3.1 20190311 (Red Hat 8.3.1-3)  GMP version 6.0.0  MPFR version 3.1.1  MPC version 1.0.1  isl version isl-0.16.1-GMP]
         ignore line: []
@@ -185,15 +185,15 @@ events:
         ignore line: []
         ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
         ignore line: [Compiler executable checksum: 7f7bfebac998692a8c6049d3da01a54f]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_b5421.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
-        ignore line: [ /opt/rh/devtoolset-8/root/usr/libexec/gcc/x86_64-redhat-linux/8/as -v --64 -o CMakeFiles/cmTC_b5421.dir/CMakeCXXCompilerABI.cpp.o /tmp/ccAeqJve.s]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_023fd.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+        ignore line: [ /opt/rh/devtoolset-8/root/usr/libexec/gcc/x86_64-redhat-linux/8/as -v --64 -o CMakeFiles/cmTC_023fd.dir/CMakeCXXCompilerABI.cpp.o /tmp/ccsc31rW.s]
         ignore line: [GNU assembler version 2.30 (x86_64-redhat-linux) using BFD version version 2.30-55.el7.2]
         ignore line: [COMPILER_PATH=/opt/rh/devtoolset-8/root/usr/libexec/gcc/x86_64-redhat-linux/8/:/opt/rh/devtoolset-8/root/usr/libexec/gcc/x86_64-redhat-linux/8/:/opt/rh/devtoolset-8/root/usr/libexec/gcc/x86_64-redhat-linux/:/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/:/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/]
-        ignore line: [LIBRARY_PATH=/usr/lib64/../lib64/:/usr/lib64/../lib64/:/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/:/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:./:/usr/lib64/:/usr/lib64/:/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/../../../:/lib/:/usr/lib/]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_b5421.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
-        ignore line: [Linking CXX executable cmTC_b5421]
-        ignore line: [/usr/local/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b5421.dir/link.txt --verbose=1]
-        ignore line: [/usr/bin/c++  -v CMakeFiles/cmTC_b5421.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_b5421 ]
+        ignore line: [LIBRARY_PATH=/usr/lib64/../lib64/:/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/:/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:./:/usr/lib64/:/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_023fd.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+        ignore line: [Linking CXX executable cmTC_023fd]
+        ignore line: [/usr/local/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_023fd.dir/link.txt --verbose=1]
+        ignore line: [/usr/bin/c++  -v CMakeFiles/cmTC_023fd.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_023fd ]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=/usr/bin/c++]
         ignore line: [COLLECT_LTO_WRAPPER=/opt/rh/devtoolset-8/root/usr/libexec/gcc/x86_64-redhat-linux/8/lto-wrapper]
@@ -202,14 +202,14 @@ events:
         ignore line: [Thread model: posix]
         ignore line: [gcc version 8.3.1 20190311 (Red Hat 8.3.1-3) (GCC) ]
         ignore line: [COMPILER_PATH=/opt/rh/devtoolset-8/root/usr/libexec/gcc/x86_64-redhat-linux/8/:/opt/rh/devtoolset-8/root/usr/libexec/gcc/x86_64-redhat-linux/8/:/opt/rh/devtoolset-8/root/usr/libexec/gcc/x86_64-redhat-linux/:/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/:/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/]
-        ignore line: [LIBRARY_PATH=/usr/lib64/../lib64/:/usr/lib64/../lib64/:/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/:/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:./:/usr/lib64/:/usr/lib64/:/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/../../../:/lib/:/usr/lib/]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_b5421' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
-        link line: [ /opt/rh/devtoolset-8/root/usr/libexec/gcc/x86_64-redhat-linux/8/collect2 -plugin /opt/rh/devtoolset-8/root/usr/libexec/gcc/x86_64-redhat-linux/8/liblto_plugin.so -plugin-opt=/opt/rh/devtoolset-8/root/usr/libexec/gcc/x86_64-redhat-linux/8/lto-wrapper -plugin-opt=-fresolution=/tmp/ccJCgX1g.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --no-add-needed --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_b5421 /usr/lib64/../lib64/crt1.o /usr/lib64/../lib64/crti.o /opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/crtbegin.o -L/usr/lib64/../lib64 -L/usr/lib64/../lib64 -L/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8 -L/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L. -L/usr/lib64 -L/usr/lib64 -L/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/../../.. CMakeFiles/cmTC_b5421.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/crtend.o /usr/lib64/../lib64/crtn.o]
+        ignore line: [LIBRARY_PATH=/usr/lib64/../lib64/:/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/:/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:./:/usr/lib64/:/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_023fd' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+        link line: [ /opt/rh/devtoolset-8/root/usr/libexec/gcc/x86_64-redhat-linux/8/collect2 -plugin /opt/rh/devtoolset-8/root/usr/libexec/gcc/x86_64-redhat-linux/8/liblto_plugin.so -plugin-opt=/opt/rh/devtoolset-8/root/usr/libexec/gcc/x86_64-redhat-linux/8/lto-wrapper -plugin-opt=-fresolution=/tmp/cc1xLM3Z.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --no-add-needed --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_023fd /usr/lib64/../lib64/crt1.o /usr/lib64/../lib64/crti.o /opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/crtbegin.o -L/usr/lib64/../lib64 -L/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8 -L/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L. -L/usr/lib64 -L/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/../../.. CMakeFiles/cmTC_023fd.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/crtend.o /usr/lib64/../lib64/crtn.o]
           arg [/opt/rh/devtoolset-8/root/usr/libexec/gcc/x86_64-redhat-linux/8/collect2] ==> ignore
           arg [-plugin] ==> ignore
           arg [/opt/rh/devtoolset-8/root/usr/libexec/gcc/x86_64-redhat-linux/8/liblto_plugin.so] ==> ignore
           arg [-plugin-opt=/opt/rh/devtoolset-8/root/usr/libexec/gcc/x86_64-redhat-linux/8/lto-wrapper] ==> ignore
-          arg [-plugin-opt=-fresolution=/tmp/ccJCgX1g.res] ==> ignore
+          arg [-plugin-opt=-fresolution=/tmp/cc1xLM3Z.res] ==> ignore
           arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
           arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
           arg [-plugin-opt=-pass-through=-lc] ==> ignore
@@ -224,11 +224,10 @@ events:
           arg [-dynamic-linker] ==> ignore
           arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
           arg [-o] ==> ignore
-          arg [cmTC_b5421] ==> ignore
+          arg [cmTC_023fd] ==> ignore
           arg [/usr/lib64/../lib64/crt1.o] ==> obj [/usr/lib64/../lib64/crt1.o]
           arg [/usr/lib64/../lib64/crti.o] ==> obj [/usr/lib64/../lib64/crti.o]
           arg [/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/crtbegin.o] ==> obj [/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/crtbegin.o]
-          arg [-L/usr/lib64/../lib64] ==> dir [/usr/lib64/../lib64]
           arg [-L/usr/lib64/../lib64] ==> dir [/usr/lib64/../lib64]
           arg [-L/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8] ==> dir [/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8]
           arg [-L/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/../../../../lib64] ==> dir [/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/../../../../lib64]
@@ -236,9 +235,8 @@ events:
           arg [-L/usr/lib/../lib64] ==> dir [/usr/lib/../lib64]
           arg [-L.] ==> ignore
           arg [-L/usr/lib64] ==> dir [/usr/lib64]
-          arg [-L/usr/lib64] ==> dir [/usr/lib64]
           arg [-L/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/../../..] ==> dir [/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/../../..]
-          arg [CMakeFiles/cmTC_b5421.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+          arg [CMakeFiles/cmTC_023fd.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
           arg [-lstdc++] ==> lib [stdc++]
           arg [-lm] ==> lib [m]
           arg [-lgcc_s] ==> lib [gcc_s]
@@ -252,12 +250,10 @@ events:
         collapse obj [/usr/lib64/../lib64/crti.o] ==> [/usr/lib64/crti.o]
         collapse obj [/usr/lib64/../lib64/crtn.o] ==> [/usr/lib64/crtn.o]
         collapse library dir [/usr/lib64/../lib64] ==> [/usr/lib64]
-        collapse library dir [/usr/lib64/../lib64] ==> [/usr/lib64]
         collapse library dir [/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8] ==> [/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8]
         collapse library dir [/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/../../../../lib64] ==> [/opt/rh/devtoolset-8/root/usr/lib64]
         collapse library dir [/lib/../lib64] ==> [/lib64]
         collapse library dir [/usr/lib/../lib64] ==> [/usr/lib64]
-        collapse library dir [/usr/lib64] ==> [/usr/lib64]
         collapse library dir [/usr/lib64] ==> [/usr/lib64]
         collapse library dir [/opt/rh/devtoolset-8/root/usr/lib/gcc/x86_64-redhat-linux/8/../../..] ==> [/opt/rh/devtoolset-8/root/usr/lib]
         implicit libs: [stdc++;m;gcc_s;gcc;c;gcc_s;gcc]
@@ -277,14 +273,14 @@ events:
       - "/home/wpwl/vcpkg/installed/x64-linux-dynamic/share/pybind11/pybind11Common.cmake:376 (_pybind11_generate_lto)"
       - "/home/wpwl/vcpkg/installed/x64-linux-dynamic/share/pybind11/pybind11Config.cmake:248 (include)"
       - "/home/wpwl/vcpkg/scripts/buildsystems/vcpkg.cmake:855 (_find_package)"
-      - "CMakeLists.txt:31 (find_package)"
+      - "CMakeLists.txt:38 (find_package)"
     checks:
       - "Performing Test HAS_FLTO"
     directories:
-      source: "/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-JVBYpO"
-      binary: "/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-JVBYpO"
+      source: "/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-6oKoQy"
+      binary: "/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-6oKoQy"
     cmakeVariables:
-      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS: " -fPIC -O3 -pthread -std=c++17 -fvisibility=hidden"
       CMAKE_CXX_FLAGS_DEBUG: "-g"
       CMAKE_EXE_LINKER_FLAGS: ""
       CMAKE_MODULE_PATH: "/home/wpwl/vcpkg/installed/x64-linux-dynamic/share/ffmpeg"
@@ -295,17 +291,17 @@ events:
       variable: "HAS_FLTO"
       cached: true
       stdout: |
-        Change Dir: '/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-JVBYpO'
+        Change Dir: '/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-6oKoQy'
         
-        Run Build Command(s): /usr/local/cmake/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_3e637/fast
-        /usr/bin/gmake  -f CMakeFiles/cmTC_3e637.dir/build.make CMakeFiles/cmTC_3e637.dir/build
-        gmake[1]: Entering directory `/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-JVBYpO'
-        Building CXX object CMakeFiles/cmTC_3e637.dir/src.cxx.o
-        /usr/bin/c++ -DHAS_FLTO  -std=gnu++17   -flto -fno-fat-lto-objects -o CMakeFiles/cmTC_3e637.dir/src.cxx.o -c /home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-JVBYpO/src.cxx
-        Linking CXX executable cmTC_3e637
-        /usr/local/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3e637.dir/link.txt --verbose=1
-        /usr/bin/c++ CMakeFiles/cmTC_3e637.dir/src.cxx.o -o cmTC_3e637  -flto 
-        gmake[1]: Leaving directory `/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-JVBYpO'
+        Run Build Command(s): /usr/local/cmake/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_f2925/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_f2925.dir/build.make CMakeFiles/cmTC_f2925.dir/build
+        gmake[1]: Entering directory `/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-6oKoQy'
+        Building CXX object CMakeFiles/cmTC_f2925.dir/src.cxx.o
+        /usr/bin/c++ -DHAS_FLTO  -fPIC -O3 -pthread -std=c++17 -fvisibility=hidden  -std=gnu++17   -flto -fno-fat-lto-objects -o CMakeFiles/cmTC_f2925.dir/src.cxx.o -c /home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-6oKoQy/src.cxx
+        Linking CXX executable cmTC_f2925
+        /usr/local/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f2925.dir/link.txt --verbose=1
+        /usr/bin/c++  -fPIC -O3 -pthread -std=c++17 -fvisibility=hidden  CMakeFiles/cmTC_f2925.dir/src.cxx.o -o cmTC_f2925  -flto 
+        gmake[1]: Leaving directory `/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-6oKoQy'
         
       exitCode: 0
   -
@@ -320,14 +316,14 @@ events:
       - "/home/wpwl/vcpkg/installed/x64-linux-dynamic/share/opencv4/OpenCVModules.cmake:34 (find_dependency)"
       - "/home/wpwl/vcpkg/installed/x64-linux-dynamic/share/opencv4/OpenCVConfig.cmake:126 (include)"
       - "/home/wpwl/vcpkg/scripts/buildsystems/vcpkg.cmake:855 (_find_package)"
-      - "CMakeLists.txt:32 (find_package)"
+      - "CMakeLists.txt:39 (find_package)"
     checks:
       - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
     directories:
-      source: "/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-QdB36r"
-      binary: "/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-QdB36r"
+      source: "/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-JFNp89"
+      binary: "/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-JFNp89"
     cmakeVariables:
-      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS: " -fPIC -O3 -pthread -std=c++17 -fvisibility=hidden"
       CMAKE_CXX_FLAGS_DEBUG: "-g"
       CMAKE_EXE_LINKER_FLAGS: ""
       CMAKE_MODULE_PATH: "/home/wpwl/vcpkg/installed/x64-linux-dynamic/share/ffmpeg"
@@ -338,159 +334,17 @@ events:
       variable: "CMAKE_HAVE_LIBC_PTHREAD"
       cached: true
       stdout: |
-        Change Dir: '/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-QdB36r'
+        Change Dir: '/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-JFNp89'
         
-        Run Build Command(s): /usr/local/cmake/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_929b0/fast
-        /usr/bin/gmake  -f CMakeFiles/cmTC_929b0.dir/build.make CMakeFiles/cmTC_929b0.dir/build
-        gmake[1]: 进入目录“/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-QdB36r”
-        Building CXX object CMakeFiles/cmTC_929b0.dir/src.cxx.o
-        /usr/bin/c++ -DCMAKE_HAVE_LIBC_PTHREAD  -std=gnu++17 -o CMakeFiles/cmTC_929b0.dir/src.cxx.o -c /home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-QdB36r/src.cxx
-        Linking CXX executable cmTC_929b0
-        /usr/local/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_929b0.dir/link.txt --verbose=1
-        /usr/bin/c++ CMakeFiles/cmTC_929b0.dir/src.cxx.o -o cmTC_929b0 
-        CMakeFiles/cmTC_929b0.dir/src.cxx.o：在函数‘main’中：
-        src.cxx:(.text+0x2d)：对‘pthread_create’未定义的引用
-        src.cxx:(.text+0x39)：对‘pthread_detach’未定义的引用
-        src.cxx:(.text+0x45)：对‘pthread_cancel’未定义的引用
-        src.cxx:(.text+0x56)：对‘pthread_join’未定义的引用
-        src.cxx:(.text+0x6a)：对‘pthread_atfork’未定义的引用
-        collect2: error: ld returned 1 exit status
-        gmake[1]: *** [cmTC_929b0] 错误 1
-        gmake[1]: 离开目录“/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-QdB36r”
-        gmake: *** [cmTC_929b0/fast] 错误 2
-        
-      exitCode: 2
-  -
-    kind: "try_compile-v1"
-    backtrace:
-      - "/usr/local/cmake/share/cmake-3.27/Modules/CheckLibraryExists.cmake:69 (try_compile)"
-      - "/usr/local/cmake/share/cmake-3.27/Modules/FindThreads.cmake:112 (CHECK_LIBRARY_EXISTS)"
-      - "/usr/local/cmake/share/cmake-3.27/Modules/FindThreads.cmake:175 (_threads_check_lib)"
-      - "/home/wpwl/vcpkg/scripts/buildsystems/vcpkg.cmake:855 (_find_package)"
-      - "/usr/local/cmake/share/cmake-3.27/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)"
-      - "/home/wpwl/vcpkg/installed/x64-linux-dynamic/share/opencv4/OpenCVModules.cmake:34 (find_dependency)"
-      - "/home/wpwl/vcpkg/installed/x64-linux-dynamic/share/opencv4/OpenCVConfig.cmake:126 (include)"
-      - "/home/wpwl/vcpkg/scripts/buildsystems/vcpkg.cmake:855 (_find_package)"
-      - "CMakeLists.txt:32 (find_package)"
-    checks:
-      - "Looking for pthread_create in pthreads"
-    directories:
-      source: "/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-Mt8pY5"
-      binary: "/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-Mt8pY5"
-    cmakeVariables:
-      CMAKE_CXX_FLAGS: ""
-      CMAKE_CXX_FLAGS_DEBUG: "-g"
-      CMAKE_EXE_LINKER_FLAGS: ""
-      CMAKE_MODULE_PATH: "/home/wpwl/vcpkg/installed/x64-linux-dynamic/share/ffmpeg"
-      VCPKG_APPLOCAL_DEPS: "ON"
-      VCPKG_TARGET_TRIPLET: "x64-linux"
-      Z_VCPKG_ROOT_DIR: "/home/wpwl/vcpkg"
-    buildResult:
-      variable: "CMAKE_HAVE_PTHREADS_CREATE"
-      cached: true
-      stdout: |
-        Change Dir: '/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-Mt8pY5'
-        
-        Run Build Command(s): /usr/local/cmake/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_3f423/fast
-        /usr/bin/gmake  -f CMakeFiles/cmTC_3f423.dir/build.make CMakeFiles/cmTC_3f423.dir/build
-        gmake[1]: 进入目录“/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-Mt8pY5”
-        Building CXX object CMakeFiles/cmTC_3f423.dir/CheckFunctionExists.cxx.o
-        /usr/bin/c++   -DCHECK_FUNCTION_EXISTS=pthread_create -std=gnu++17 -o CMakeFiles/cmTC_3f423.dir/CheckFunctionExists.cxx.o -c /home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-Mt8pY5/CheckFunctionExists.cxx
-        Linking CXX executable cmTC_3f423
-        /usr/local/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3f423.dir/link.txt --verbose=1
-        /usr/bin/c++  -DCHECK_FUNCTION_EXISTS=pthread_create CMakeFiles/cmTC_3f423.dir/CheckFunctionExists.cxx.o -o cmTC_3f423  -lpthreads 
-        /opt/rh/devtoolset-8/root/usr/libexec/gcc/x86_64-redhat-linux/8/ld: 找不到 -lpthreads
-        collect2: error: ld returned 1 exit status
-        gmake[1]: *** [cmTC_3f423] 错误 1
-        gmake[1]: 离开目录“/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-Mt8pY5”
-        gmake: *** [cmTC_3f423/fast] 错误 2
-        
-      exitCode: 2
-  -
-    kind: "try_compile-v1"
-    backtrace:
-      - "/usr/local/cmake/share/cmake-3.27/Modules/CheckLibraryExists.cmake:69 (try_compile)"
-      - "/usr/local/cmake/share/cmake-3.27/Modules/FindThreads.cmake:112 (CHECK_LIBRARY_EXISTS)"
-      - "/usr/local/cmake/share/cmake-3.27/Modules/FindThreads.cmake:176 (_threads_check_lib)"
-      - "/home/wpwl/vcpkg/scripts/buildsystems/vcpkg.cmake:855 (_find_package)"
-      - "/usr/local/cmake/share/cmake-3.27/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)"
-      - "/home/wpwl/vcpkg/installed/x64-linux-dynamic/share/opencv4/OpenCVModules.cmake:34 (find_dependency)"
-      - "/home/wpwl/vcpkg/installed/x64-linux-dynamic/share/opencv4/OpenCVConfig.cmake:126 (include)"
-      - "/home/wpwl/vcpkg/scripts/buildsystems/vcpkg.cmake:855 (_find_package)"
-      - "CMakeLists.txt:32 (find_package)"
-    checks:
-      - "Looking for pthread_create in pthread"
-    directories:
-      source: "/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-oGkcXJ"
-      binary: "/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-oGkcXJ"
-    cmakeVariables:
-      CMAKE_CXX_FLAGS: ""
-      CMAKE_CXX_FLAGS_DEBUG: "-g"
-      CMAKE_EXE_LINKER_FLAGS: ""
-      CMAKE_MODULE_PATH: "/home/wpwl/vcpkg/installed/x64-linux-dynamic/share/ffmpeg"
-      VCPKG_APPLOCAL_DEPS: "ON"
-      VCPKG_TARGET_TRIPLET: "x64-linux"
-      Z_VCPKG_ROOT_DIR: "/home/wpwl/vcpkg"
-    buildResult:
-      variable: "CMAKE_HAVE_PTHREAD_CREATE"
-      cached: true
-      stdout: |
-        Change Dir: '/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-oGkcXJ'
-        
-        Run Build Command(s): /usr/local/cmake/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_ee464/fast
-        /usr/bin/gmake  -f CMakeFiles/cmTC_ee464.dir/build.make CMakeFiles/cmTC_ee464.dir/build
-        gmake[1]: 进入目录“/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-oGkcXJ”
-        Building CXX object CMakeFiles/cmTC_ee464.dir/CheckFunctionExists.cxx.o
-        /usr/bin/c++   -DCHECK_FUNCTION_EXISTS=pthread_create -std=gnu++17 -o CMakeFiles/cmTC_ee464.dir/CheckFunctionExists.cxx.o -c /home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-oGkcXJ/CheckFunctionExists.cxx
-        Linking CXX executable cmTC_ee464
-        /usr/local/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ee464.dir/link.txt --verbose=1
-        /usr/bin/c++  -DCHECK_FUNCTION_EXISTS=pthread_create CMakeFiles/cmTC_ee464.dir/CheckFunctionExists.cxx.o -o cmTC_ee464  -lpthread 
-        gmake[1]: 离开目录“/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-oGkcXJ”
-        
-      exitCode: 0
-  -
-    kind: "try_compile-v1"
-    backtrace:
-      - "/usr/local/cmake/share/cmake-3.27/Modules/FindThreads.cmake:136 (try_compile)"
-      - "/usr/local/cmake/share/cmake-3.27/Modules/FindThreads.cmake:169 (_threads_check_flag_pthread)"
-      - "/home/wpwl/vcpkg/scripts/buildsystems/vcpkg.cmake:855 (_find_package)"
-      - "/home/wpwl/vcpkg/installed/x64-linux/share/liblzma/vcpkg-cmake-wrapper.cmake:57 (find_package)"
-      - "/home/wpwl/vcpkg/scripts/buildsystems/vcpkg.cmake:809 (include)"
-      - "/home/wpwl/vcpkg/installed/x64-linux/share/tiff/vcpkg-cmake-wrapper.cmake:25 (find_package)"
-      - "/home/wpwl/vcpkg/scripts/buildsystems/vcpkg.cmake:809 (include)"
-      - "/usr/local/cmake/share/cmake-3.27/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)"
-      - "/home/wpwl/vcpkg/installed/x64-linux-dynamic/share/opencv4/OpenCVModules.cmake:35 (find_dependency)"
-      - "/home/wpwl/vcpkg/installed/x64-linux-dynamic/share/opencv4/OpenCVConfig.cmake:126 (include)"
-      - "/home/wpwl/vcpkg/scripts/buildsystems/vcpkg.cmake:855 (_find_package)"
-      - "CMakeLists.txt:32 (find_package)"
-    checks:
-      - "Check if compiler accepts -pthread"
-    directories:
-      source: "/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-qbT58n"
-      binary: "/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-qbT58n"
-    cmakeVariables:
-      CMAKE_CXX_FLAGS: ""
-      CMAKE_CXX_FLAGS_DEBUG: "-g"
-      CMAKE_EXE_LINKER_FLAGS: ""
-      CMAKE_MODULE_PATH: "/home/wpwl/vcpkg/installed/x64-linux-dynamic/share/ffmpeg"
-      VCPKG_APPLOCAL_DEPS: "ON"
-      VCPKG_TARGET_TRIPLET: "x64-linux"
-      Z_VCPKG_ROOT_DIR: "/home/wpwl/vcpkg"
-    buildResult:
-      variable: "THREADS_HAVE_PTHREAD_ARG"
-      cached: true
-      stdout: |
-        Change Dir: '/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-qbT58n'
-        
-        Run Build Command(s): /usr/local/cmake/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_d084c/fast
-        /usr/bin/gmake  -f CMakeFiles/cmTC_d084c.dir/build.make CMakeFiles/cmTC_d084c.dir/build
-        gmake[1]: 进入目录“/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-qbT58n”
-        Building CXX object CMakeFiles/cmTC_d084c.dir/CheckForPthreads.cxx.o
-        /usr/bin/c++   -std=gnu++17 -o CMakeFiles/cmTC_d084c.dir/CheckForPthreads.cxx.o -c /home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-qbT58n/CheckForPthreads.cxx
-        Linking CXX executable cmTC_d084c
-        /usr/local/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d084c.dir/link.txt --verbose=1
-        /usr/bin/c++ CMakeFiles/cmTC_d084c.dir/CheckForPthreads.cxx.o -o cmTC_d084c  -pthread 
-        gmake[1]: 离开目录“/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-qbT58n”
+        Run Build Command(s): /usr/local/cmake/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_2c45f/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_2c45f.dir/build.make CMakeFiles/cmTC_2c45f.dir/build
+        gmake[1]: 进入目录“/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-JFNp89”
+        Building CXX object CMakeFiles/cmTC_2c45f.dir/src.cxx.o
+        /usr/bin/c++ -DCMAKE_HAVE_LIBC_PTHREAD  -fPIC -O3 -pthread -std=c++17 -fvisibility=hidden  -std=gnu++17 -o CMakeFiles/cmTC_2c45f.dir/src.cxx.o -c /home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-JFNp89/src.cxx
+        Linking CXX executable cmTC_2c45f
+        /usr/local/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2c45f.dir/link.txt --verbose=1
+        /usr/bin/c++  -fPIC -O3 -pthread -std=c++17 -fvisibility=hidden  CMakeFiles/cmTC_2c45f.dir/src.cxx.o -o cmTC_2c45f 
+        gmake[1]: 离开目录“/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/CMakeScratch/TryCompile-JFNp89”
         
       exitCode: 0
 ...
