@@ -9,6 +9,9 @@ set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake")
 set(CMAKE_BUILD_TYPE Release)
 #set(CMAKE_BUILD_TYPE Debug)
 
+# 指定GPU支持的编译标志
+add_definitions(-D__STDC_CONSTANT_MACROS -DHWACCEL)
+
 set(Python3_ROOT_DIR "/home/wpwl/miniconda3/envs/py310")
 set(Python_ADDITIONAL_VERSIONS 3.10.11)
 find_package(PythonInterp REQUIRED)

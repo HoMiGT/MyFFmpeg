@@ -13,7 +13,6 @@ inline void set_options(AVDictionary* format_options,const std::string& video_si
     av_dict_set(&format_options, "video_size", video_size.c_str(), 0);
     av_dict_set(&format_options, "pixel_format", pixel_format.c_str(), 0);
     av_dict_set(&format_options, "probesize", "10485760", 0); // 设置探测大小 10MB
-    av_dict_set(&format_options, "analyzeduration", timeout_str.c_str(), 0); // 设置分析时长 2s
     av_dict_set(&format_options, "rtsp_transport", "tcp", 0);
     av_dict_set(&format_options, "max_delay", "250", 0);
     av_dict_set(&format_options, "max_analyze_duration", timeout_str.c_str(), 0);  // 设置最大分析时长 2s
@@ -44,7 +43,7 @@ std::chrono::milliseconds MyFFmpeg::sleep(int attempt)
 	static std::array<int, 10> arr_wait = { 1,1,1,1,1,1,3,1,3,1 }; // 20
 	static std::default_random_engine engine(std::random_device{}());
 	static std::uniform_real_distribution<double> distribution(0.0, 1.0);
-	int delay = arr_wait[attempt % 10] * 1000 + distribution(engine) * 100; // 计算等待时间
+	int delay = arr_wait[attempt % 10] * 100 + distribution(engine) * 100; // 计算等待时间
 	return std::chrono::milliseconds(delay);
 }
 
@@ -85,22 +84,18 @@ int MyFFmpeg::initialize() noexcept {
         if (!m_format_ctx) PKRT(INIT_ERR_ALLOC_FORMAT);
         m_input_format = av_find_input_format("flv");
         if (!m_input_format) PKRT(INIT_ERR_ALLOC_INPUT_FORMAT);
-        std::chrono::milliseconds delay;
-        m_open_start_time = static_cast<double>(cv::getTickCount());
+        std::chrono::milliseconds delay(0);
 
         do {
             m_is_closed_input = false;
             m_is_free_options = false;
             m_format_ctx->interrupt_callback.callback = this->my_interrupt_callback;
             m_format_ctx->interrupt_callback.opaque = this;
-            std::cout<<" a 1" << std::endl;
+            m_open_start_time = static_cast<double>(cv::getTickCount());
             m_ret = avformat_open_input(&m_format_ctx, m_video_path.c_str(), m_input_format, &m_format_options);
-            std::cout<<" a 2" << std::endl;
             if (!m_ret) {
-                std::cout<<" a 3" << std::endl;
                 m_stream_index = -1;
                 m_ret = avformat_find_stream_info(m_format_ctx, nullptr);
-                std::cout<<" a 4" << std::endl;
                 for (int i = 0; i < m_format_ctx->nb_streams; i++)
                     if (m_format_ctx->streams[i]->codecpar->codec_type == AVMEDIA_TYPE_VIDEO) {
                         m_stream_index = i;
@@ -116,7 +111,6 @@ int MyFFmpeg::initialize() noexcept {
                 avformat_free_context(m_format_ctx);
                 m_is_closed_input = true;
             }
-            std::cout<<" a 5" << std::endl;
             m_format_ctx = nullptr;
             if(m_format_options) {
                 av_dict_free(&m_format_options);
@@ -134,7 +128,7 @@ int MyFFmpeg::initialize() noexcept {
         if (m_stream_index == -1) PKRT(INIT_ERR_FIND_DECODER);
         m_open_flag = true;
         
-        av_dump_format(m_format_ctx, -1, m_video_path.c_str(), 0);
+//        av_dump_format(m_format_ctx, -1, m_video_path.c_str(), 0);
 
         m_codec = avcodec_find_decoder(m_format_ctx->streams[m_stream_index]->codecpar->codec_id);
         if (!m_codec) PKRT(INIT_ERR_FIND_DECODER);
@@ -253,7 +247,7 @@ int MyFFmpeg::video_frames(py::array_t<uint8_t> arr,int arr_len){
 int MyFFmpeg::my_interrupt_callback(void *opaque){
 	MyFFmpeg *p = (MyFFmpeg *)opaque;
 	if(p){
-		if(!p->m_open_flag && (((double)cv::getTickCount() - p->m_open_start_time) / cv::getTickFrequency()) > 2){
+		if(!p->m_open_flag && (((double)cv::getTickCount() - p->m_open_start_time) / cv::getTickFrequency()) > p->m_timeout/1000){
 			return 1;
 		} 
 	}
@@ -265,7 +259,7 @@ PYBIND11_MODULE(MyFFmpeg, m) {
 		.def(py::init<const std::string, const std::string,const int, const double, const int,const std::string>(),
 		        py::arg("video_path"),
                 py::arg("video_size") ="540x960",
-                py::arg("timeout") = 2000,
+                py::arg("timeout") = 3000,
                 py::arg("crop_height_rate")=0.5,
                 py::arg("open_try_count") = 5,
                 py::arg("pixel_format")="yuv420p",
