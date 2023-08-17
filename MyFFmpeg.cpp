@@ -3,49 +3,28 @@
 #include <cstring>
 #include <random>
 #include <cmath>
-#include <thread>
-#include <shared_mutex>
 
-std::shared_mutex rwLock;
+#define INBUF_SIZE 4096
+// 包装结果 pack result
+#define PKRT(k)  return ( StateConvert.count(static_cast<int>(k)) ? StateConvert.at(static_cast<int>(k)) : 3999 )
 
-inline void set_options(AVDictionary* format_options,const std::string& video_size,int timeout, const std::string& pixel_format){
-    auto timeout_str = std::to_string(timeout*1000);
-    av_dict_set(&format_options, "video_size", video_size.c_str(), 0);
-    av_dict_set(&format_options, "pixel_format", pixel_format.c_str(), 0);
+inline void set_options(AVDictionary*& format_options,int width,int height){
+    auto video_size = std::to_string(width) + "x" + std::to_string(height);
+    av_dict_set(&format_options,"video_size",video_size.c_str(),0);
+    av_dict_set(&format_options, "pixel_format", "yuvj420p", 0);
     av_dict_set(&format_options, "probesize", "10485760", 0); // 设置探测大小 10MB
     av_dict_set(&format_options, "rtsp_transport", "tcp", 0);
     av_dict_set(&format_options, "max_delay", "250", 0);
-    av_dict_set(&format_options, "max_analyze_duration", timeout_str.c_str(), 0);  // 设置最大分析时长 2s
-    av_dict_set(&format_options, "stimeout", timeout_str.c_str(), 0); // 设置超时时间 2s
-    av_dict_set(&format_options,"timetout",timeout_str.c_str(),0);
 }
 
-MyFFmpeg::MyFFmpeg(const std::string video_path,const std::string video_size,int timeout,double crop_y_rate,int open_try_count,const std::string pixel_format)
+MyFFmpeg::MyFFmpeg(const std::string video_path,int width,int height,int timeout,double crop_y_rate,int open_try_count)
 	: m_video_path(video_path)
-    , m_video_size(video_size)
+    , m_width(width)
+    , m_height(height)
     , m_timeout(timeout)
 	, m_crop_y_rate(crop_y_rate)
 	, m_open_try_count(open_try_count)
-    , m_pixel_format(pixel_format)
-{
-    av_log(nullptr,AV_LOG_INFO,"video_size:%s",video_size.c_str());
-    set_options(m_format_options,m_video_size,m_timeout, m_pixel_format);
-};
-
-
-/// <summary>
-/// 波动式随机等待
-/// </summary>
-/// <param name="attempt"></param>
-/// <returns></returns>
-std::chrono::milliseconds MyFFmpeg::sleep(int attempt)
-{
-	static std::array<int, 10> arr_wait = { 1,1,1,1,1,1,3,1,3,1 }; // 20
-	static std::default_random_engine engine(std::random_device{}());
-	static std::uniform_real_distribution<double> distribution(0.0, 1.0);
-	int delay = arr_wait[attempt % 10] * 100 + distribution(engine) * 100; // 计算等待时间
-	return std::chrono::milliseconds(delay);
-}
+{}
 
 void MyFFmpeg::destruction() {
     try{
@@ -72,38 +51,38 @@ void MyFFmpeg::destruction() {
         m_format_options = nullptr;
 
         avformat_network_deinit();
+        m_is_destruction = true;
     }catch (std::exception& e){
-        std::cout<<"destruction error:"<< e.what() <<std::endl;
+        av_log(nullptr,AV_LOG_ERROR,"destruction error:%s\n",e.what());
     }
 }
 
 int MyFFmpeg::initialize() noexcept {
     try{
         avformat_network_init();
-        m_format_ctx = avformat_alloc_context();
-        if (!m_format_ctx) PKRT(INIT_ERR_ALLOC_FORMAT);
         m_input_format = av_find_input_format("flv");
         if (!m_input_format) PKRT(INIT_ERR_ALLOC_INPUT_FORMAT);
-        std::chrono::milliseconds delay(0);
+        m_open_start_time = static_cast<double>(cv::getTickCount());
 
         do {
+            av_log(nullptr,AV_LOG_INFO,"open_try_index:%d\n",m_open_try_index);
             m_is_closed_input = false;
             m_is_free_options = false;
+            set_options(m_format_options,m_width,m_height);
+
+            m_format_ctx = avformat_alloc_context();
             m_format_ctx->interrupt_callback.callback = this->my_interrupt_callback;
             m_format_ctx->interrupt_callback.opaque = this;
-            m_open_start_time = static_cast<double>(cv::getTickCount());
             m_ret = avformat_open_input(&m_format_ctx, m_video_path.c_str(), m_input_format, &m_format_options);
             if (!m_ret) {
                 m_stream_index = -1;
                 m_ret = avformat_find_stream_info(m_format_ctx, nullptr);
-                for (int i = 0; i < m_format_ctx->nb_streams; i++)
-                    if (m_format_ctx->streams[i]->codecpar->codec_type == AVMEDIA_TYPE_VIDEO) {
-                        m_stream_index = i;
-                        break;
-                    }
-                if (m_stream_index >= 0) break;
-            };
+                if (m_ret>=0){
+                    m_stream_index = av_find_best_stream(m_format_ctx, AVMEDIA_TYPE_VIDEO, -1, -1, nullptr, 0);
+                    if (m_stream_index >= 0) break;
+                }
 
+            };
             if(m_format_ctx){
                 m_format_ctx->interrupt_callback.callback = nullptr;
                 m_format_ctx->interrupt_callback.opaque = nullptr;
@@ -117,18 +96,12 @@ int MyFFmpeg::initialize() noexcept {
                 m_is_free_options = true;
             }
             m_format_options = nullptr;
-
-            m_format_ctx = avformat_alloc_context();
-            set_options(m_format_options,m_video_size,m_timeout,m_pixel_format);
-
-            delay = sleep(m_open_try_index);
-            std::this_thread::sleep_for(delay);
         } while (m_open_try_index++ < m_open_try_count);
         if (m_ret) PKRT(m_ret);
         if (m_stream_index == -1) PKRT(INIT_ERR_FIND_DECODER);
         m_open_flag = true;
         
-//        av_dump_format(m_format_ctx, -1, m_video_path.c_str(), 0);
+        av_dump_format(m_format_ctx, -1, m_video_path.c_str(), 0);
 
         m_codec = avcodec_find_decoder(m_format_ctx->streams[m_stream_index]->codecpar->codec_id);
         if (!m_codec) PKRT(INIT_ERR_FIND_DECODER);
@@ -158,15 +131,13 @@ int MyFFmpeg::initialize() noexcept {
         m_crop_x = 0;
         PKRT(MYFS_SUCCESS);
     }catch (std::exception& e){
-        std::cout<<"initialize error:" << e.what() << std::endl;
+        av_log(nullptr,AV_LOG_ERROR,"initialize error:%s\n",e.what());
         return 3999;
     }
 }
 
-int MyFFmpeg::video_info(py::array_t<int> arr){
+int MyFFmpeg::info(py::array_t<int> arr){
 	try{
-//		py::buffer_info info = arr.request();
-//		int* ptr = static_cast<int*>(info.ptr);
         auto ptr = arr.mutable_data();
 		ptr[0] = m_crop_width;
 		ptr[1] = m_crop_height;
@@ -176,17 +147,17 @@ int MyFFmpeg::video_info(py::array_t<int> arr){
 	PKRT(MYFS_SUCCESS);
 }
 
-//int MyFFmpeg::video_info(int ptr[2]){
-//    try{
-//        ptr[0] = m_crop_width;
-//        ptr[1] = m_crop_height;
-//    }catch(...){
-//        PKRT(OTHER_ERROR_EOTHER);
-//    }
-//    PKRT(MYFS_SUCCESS);
-//}
+int MyFFmpeg::info_c(int ptr[2]){
+    try{
+        ptr[0] = m_crop_width;
+        ptr[1] = m_crop_height;
+    }catch(...){
+        PKRT(OTHER_ERROR_EOTHER);
+    }
+    PKRT(MYFS_SUCCESS);
+}
 
-void MyFFmpeg::video_crop(uint8_t* arr, unsigned long step,int index){
+void MyFFmpeg::crop(uint8_t* arr, unsigned long step,int index){
     try{
         auto video_width = m_codec_ctx->width;
         auto video_height = m_codec_ctx->height;
@@ -198,21 +169,20 @@ void MyFFmpeg::video_crop(uint8_t* arr, unsigned long step,int index){
         cv::Mat crop = img(cv::Rect(m_crop_x, m_crop_y, m_crop_width, m_crop_height));
         memcpy(arr+step*index, crop.data, step);
         sws_freeContext(m_sws_ctx);
+        m_sws_ctx = nullptr;
     }catch (std::exception& e){
-        std::cout<<"video_crop error: " << e.what() << std::endl;
+        if(m_sws_ctx) sws_freeContext(m_sws_ctx);
+        m_sws_ctx= nullptr;
+        av_log(nullptr,AV_LOG_ERROR,"video_crop error: %s\n",e.what());
     }
 }
 
-int MyFFmpeg::video_frames(py::array_t<uint8_t> arr,int arr_len){
-//int MyFFmpeg::video_frames(uint8_t* ptr,int arr_len){
+int MyFFmpeg::packet(py::array_t<uint8_t> arr,int arr_len){
     try{
-        std::unique_lock<std::shared_mutex> lock(rwLock);
         if (m_is_suspend){ // 暂停 要对其恢复
             av_read_play(m_format_ctx);
             m_is_suspend = false;
         }
-//        py::buffer_info info = arr.request();
-//        auto ptr = static_cast<uint8_t*>(info.ptr);
         auto ptr = arr.mutable_data();
         auto step = m_crop_width * m_crop_height * 3 * sizeof(uint8_t);
         int fact_arr_index = 0;
@@ -224,7 +194,7 @@ int MyFFmpeg::video_frames(py::array_t<uint8_t> arr,int arr_len){
                 if (m_ret < 0) return fact_arr_index;
                 while (avcodec_receive_frame(m_codec_ctx, m_frame) >= 0) {
                     if(fact_arr_index>=arr_len) return fact_arr_index;
-                    video_crop(ptr,step,fact_arr_index);
+                    crop(ptr,step,fact_arr_index);
                     fact_arr_index++;
                     av_frame_unref(m_frame_bgr);
                     av_frame_unref(m_frame);
@@ -238,7 +208,42 @@ int MyFFmpeg::video_frames(py::array_t<uint8_t> arr,int arr_len){
         }
         return fact_arr_index;
     }catch (std::exception& e){
-        std::cout<<"video_frames error:" << e.what() << std::endl;
+        av_log(nullptr,AV_LOG_ERROR,"video_frames error:%s\n",e.what());
+        return 0;
+    }
+}
+
+int MyFFmpeg::packet_c(uint8_t* ptr,int arr_len){
+    try{
+        if (m_is_suspend){ // 暂停 要对其恢复
+            av_read_play(m_format_ctx);
+            m_is_suspend = false;
+        }
+        auto step = m_crop_width * m_crop_height * 3 * sizeof(uint8_t);
+        int fact_arr_index = 0;
+        for(fact_arr_index =0; fact_arr_index <arr_len;){
+            m_ret = av_read_frame(m_format_ctx, m_packet);
+            if (m_ret < 0) return fact_arr_index;
+            if (m_packet->stream_index == m_stream_index) {
+                m_ret = avcodec_send_packet(m_codec_ctx, m_packet);
+                if (m_ret < 0) return fact_arr_index;
+                while (avcodec_receive_frame(m_codec_ctx, m_frame) >= 0) {
+                    if(fact_arr_index>=arr_len) return fact_arr_index;
+                    crop(ptr,step,fact_arr_index);
+                    fact_arr_index++;
+                    av_frame_unref(m_frame_bgr);
+                    av_frame_unref(m_frame);
+                }
+            }
+            av_packet_unref(m_packet);
+        }
+        if(!m_is_suspend){
+            av_read_pause(m_format_ctx);
+            m_is_suspend = true;
+        }
+        return fact_arr_index;
+    }catch (std::exception& e){
+        av_log(nullptr,AV_LOG_ERROR,"video_frames error:%s\n",e.what());
         return 0;
     }
 }
@@ -247,81 +252,79 @@ int MyFFmpeg::video_frames(py::array_t<uint8_t> arr,int arr_len){
 int MyFFmpeg::my_interrupt_callback(void *opaque){
 	MyFFmpeg *p = (MyFFmpeg *)opaque;
 	if(p){
-		if(!p->m_open_flag && (((double)cv::getTickCount() - p->m_open_start_time) / cv::getTickFrequency()) > p->m_timeout/1000){
+	    auto duration = ((double)cv::getTickCount() - p->m_open_start_time)*1000.0 / cv::getTickFrequency();
+		if(!p->m_open_flag && duration > (double)p->m_timeout){
 			return 1;
 		} 
 	}
 	return 0;
 }
 
+MyFFmpeg::~MyFFmpeg() {
+    if(m_is_destruction){
+        return;
+    }
+    destruction();
+}
+
 PYBIND11_MODULE(MyFFmpeg, m) {
 	py::class_<MyFFmpeg>(m, "MyFFmpeg")
-		.def(py::init<const std::string, const std::string,const int, const double, const int,const std::string>(),
+		.def(py::init<const std::string,const int,const int,const int, const double, const int>(),
 		        py::arg("video_path"),
-                py::arg("video_size") ="540x960",
-                py::arg("timeout") = 3000,
+                py::arg("width"),
+                py::arg("height"),
+                py::arg("timeout") = 2000,
                 py::arg("crop_height_rate")=0.5,
                 py::arg("open_try_count") = 5,
-                py::arg("pixel_format")="yuv420p",
                 py::return_value_policy::reference)
 		.def("initialize", &MyFFmpeg::initialize,py::return_value_policy::copy)
-		.def("video_info", &MyFFmpeg::video_info,py::return_value_policy::copy)
-		.def("video_frames", &MyFFmpeg::video_frames,py::return_value_policy::copy)
+		.def("info", &MyFFmpeg::info,py::return_value_policy::copy)
+		.def("packet", &MyFFmpeg::packet,py::return_value_policy::copy)
 		.def("destruction",&MyFFmpeg::destruction,py::return_value_policy::copy);
 }
 
 
-//int main(){
-//    MyFFmpeg f("/home/wpwl/Projects/MyFFmpeg/30_success.flv");
-//    auto ret = f.initialize();
-//    std::cout<<"ret:" << ret <<std::endl;
-////    py::array_t<uint8_t> array({2});
-////    auto ptr = array.mutable_data();
-//    int ptr[2] = {0,0};
-//    ret = f.video_info(ptr);
-//    std::cout<<"video_info ret:"<< ret <<", width:" << ptr[0] << ", height:" << ptr[1] << std::endl;
-//
-////    std::vector<ssize_t> shape = {30,ptr[1],ptr[0],3};
-////    py::array_t<uint8_t> frames(shape);
-//    auto one_frame_size = ptr[0]*ptr[1]*3*sizeof(uint8_t);
-//    uint8_t* frames = new uint8_t[30*one_frame_size];
-//    int index =0 ;
-//
-//    while (true){
-//        ret = f.video_frames(frames,30);
-//        std::cout<<"ret: " << ret << std::endl;
-//        cv::Mat mat;
-//        for(int i=0;i<ret;i++){
-//            cv::Mat img(ptr[1],ptr[0],CV_8UC3,frames+one_frame_size*i);
-//            cv::imwrite(std::to_string(index)+".png",img);
-//            index++;
-//        }
-//
-//        if(ret<=0)break;
-//    }
-//
-////    ret = f.video_frames(frames,30);
-////    std::cout<<"ret: " << ret << std::endl;
-////    cv::Mat mat;
-////    for(int i=0;i<ret;i++){
-////        cv::Mat img(ptr[1],ptr[0],CV_8UC3,frames+one_frame_size*i);
-////        cv::imwrite(std::to_string(i)+".png",img);
-////        index++;
-////    }
-//
-////    if(ret<=0)break;
-//
+int main(){
+    MyFFmpeg f("/home/wpwl/Projects/MyFFmpeg/3.flv",540,960,2000,0.5,5);
+    auto ret = f.initialize();
+    std::cout<<"ret:" << ret <<std::endl;
+
+    auto img_width = 540;
+    auto img_height = static_cast<int>(960*0.5);
+
+    auto one_frame_size = img_width*img_height*3*sizeof(uint8_t);
+
+    int count = 30;
+    uint8_t* frames = new uint8_t[count*one_frame_size];
+//    py::buffer_info buf_info(
+//            array,                               /* 指向数据的指针 */
+//            sizeof(uint8_t),                      /* 单个元素的大小 */
+//            py::format_descriptor<uint8_t>::format(), /* 数据的格式描述符 */
+//            1,                                    /* 数组的维数 */
+//            { 30*one_frame_size },                /* 数组的形状 */
+//            { sizeof(uint8_t) }                   /* 在每个维度中步进的字节数 */
+//    );
+//    py::array_t<uint8_t> frames(buf_info);
+
+    int index =0 ;
+
+    while (true){
+        ret = f.packet_c(frames,count);
+        std::cout<<"ret: " << ret << std::endl;
+        cv::Mat mat;
+//        auto buffer = frames.mutable_data();
+//        uint8_t *ptr = static_cast<uint8_t*>(buffer);
+        for(int i=0;i<ret;i++){
+            cv::Mat img(img_height,img_width,CV_8UC3,frames+one_frame_size*i);
+            cv::imwrite(std::to_string(index)+".png",img);
+            index++;
+        }
+
+        if(ret<=0)break;
+    }
+
 //	f.destruction();
-//
-//    delete[] frames;
-//
-////	uint8_t* free_array = array.mutable_data();
-////	delete[] free_array;
-////
-////	uint8_t* free_frames = frames.mutable_data();
-////	delete[] free_frames;
-//
-//
-//
-//    return 0;
-//}
+    delete[] frames;
+
+    return 0;
+}

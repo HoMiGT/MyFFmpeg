@@ -1,3 +1,0 @@
-/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/MyFFmpeg.dir
-/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/edit_cache.dir
-/home/wpwl/Projects/MyFFmpeg/build/CMakeFiles/rebuild_cache.dir

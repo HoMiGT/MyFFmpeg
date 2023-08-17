@@ -6,84 +6,56 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake")
 
-set(CMAKE_BUILD_TYPE Release)
-#set(CMAKE_BUILD_TYPE Debug)
+#set(CMAKE_BUILD_TYPE Release)
+set(CMAKE_BUILD_TYPE Debug)
+set(CMAKE_DEBUG_POSTFIX "")
 
-# 指定GPU支持的编译标志
-add_definitions(-D__STDC_CONSTANT_MACROS -DHWACCEL)
+set(CMAKE_C_COMPILER "gcc")
+set(CMAKE_CXX_COMPILER "g++")
+set(PLATFORM "x64-linux")
+#set(LIB_SUFFIX ".so")
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -O3 -pthread -std=c++17 -fvisibility=hidden")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
+
+set(CMAKE_INSTALL_PATH "~/Projects/MyFFmpeg")
+set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
+
+set(OpenCV_DIR "/usr/local/opencv4/lib64/cmake/opencv4")
+find_package(OpenCV REQUIRED)
+
+set(ENV{PKG_CONFIG_PATH} "/usr/local/ffmpeg/lib/pkgconfig")
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(FFMPEG REQUIRED IMPORTED_TARGET libavformat libavcodec libavutil libswscale libavfilter)
 
 set(Python3_ROOT_DIR "/home/wpwl/miniconda3/envs/py310")
 set(Python_ADDITIONAL_VERSIONS 3.10.11)
 find_package(PythonInterp REQUIRED)
 find_package(PythonLibs REQUIRED)
 
-set(CMAKE_C_COMPILER "gcc")
-set(CMAKE_CXX_COMPILER "g++")
-set(PLATFORM "x64-linux")
-set(LIB_SUFFIX ".so")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -O3 -pthread -std=c++17 -fvisibility=hidden")
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -pthread -std=c++17")
-
-
-set(CMAKE_INSTALL_PATH "~/Projects/MyFFmpeg")
-set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
-
-set(Protobuf_DIR "$ENV{VCPKG_ROOT}/installed/x64-linux-dynamic/share/protobuf")
-set(OpenCV_DIR "$ENV{VCPKG_ROOT}/installed/x64-linux-dynamic/share/opencv4")
-set(FFMPEG_DIR "$ENV{VCPKG_ROOT}/installed/x64-linux-dynamic/share/ffmpeg")
-set(pybind11_DIR "$ENV{VCPKG_ROOT}/installed/x64-linux-dynamic/share/pybind11")
-set(quirc_DIR "$ENV{VCPKG_ROOT}/installed/x64-linux-dynamic/share/quirc")
-
-list(APPEND CMAKE_MODULE_PATH "${FFMPEG_DIR}")
-
-find_package(Protobuf CONFIG REQUIRED)
-find_package(Python3 COMPONENTS Interpreter Development)
+set(pybind11_DIR "/usr/local/pybind11/share/cmake/pybind11")
+find_package(Python3 REQUIRED COMPONENTS Interpreter Development)
 find_package(pybind11 CONFIG REQUIRED)
-find_package(OpenCV REQUIRED)
-find_package(FFMPEG REQUIRED)
 
 
 include_directories(
-    "$ENV{VCPKG_ROOT}/installed/x64-linux-dynamic/include"
-    "/home/wpwl/miniconda3/envs/py310/include/python3.10"
-)
-link_directories(
-    "$ENV{VCPKG_ROOT}/installed/x64-linux-dynamic/lib"
+        "/usr/local/opencv4/include/opencv4"
+        "/usr/local/pybind11/include"
+        "/usr/local/ffmpeg/include"
+        "/usr/local/opencv4/include/"
+        "/home/wpwl/miniconda3/envs/py310/include/python3.10"
 )
 
-pybind11_add_module(MyFFmpeg MyFFmpeg.cpp)
-#add_executable(MyFFmpeg MyFFmpeg.cpp)
-target_include_directories(MyFFmpeg PRIVATE ${FFMPEG_INCLUDE_DIRS})
+#pybind11_add_module(MyFFmpeg MyFFmpeg.cpp)
+add_executable(MyFFmpeg MyFFmpeg.cpp MyFFmpeg.h MyFFmpegState.h)
+target_include_directories(MyFFmpeg PRIVATE ${FFMPEG_INCLUDE_DIRS} ${PYTHON_INCLUDE_DIRS})
 target_link_directories(MyFFmpeg PRIVATE ${FFMPEG_LIBRARY_DIRS})
 target_link_libraries(MyFFmpeg  
     PRIVATE 
-    pybind11::module
-    ${OpenCV_LIBS}
-    ${FFMPEG_LIBRARIES}
-    protobuf::libprotoc 
-    protobuf::libprotobuf 
-    protobuf::libprotobuf-lite
+        pybind11::module
+        ${OpenCV_LIBS}
+        ${FFMPEG_LIBRARIES}
+        ${PYTHON_LIBRARIES}
 )
-
-#install(TARGETS MyFFmpeg
-#        RUNTIME DESTINATION ${CMAKE_INSTALL_PATH}/lib
-#        LIBRARY DESTINATION ${CMAKE_INSTALL_PATH}/lib)
-
-# list(APPEND MY_SHARED_LIBS
-#     $ENV{VCPKG_ROOT}/installed/x64-linux-dynamic/lib/libavcodec.so.59.37.100
-#     $ENV{VCPKG_ROOT}/installed/x64-linux-dynamic/lib/libavfilter.so.8.44.100
-#     $ENV{VCPKG_ROOT}/installed/x64-linux-dynamic/lib/libavformat.so.59.27.100
-#     $ENV{VCPKG_ROOT}/installed/x64-linux-dynamic/lib/libavutil.so.57.28.100
-#     $ENV{VCPKG_ROOT}/installed/x64-linux-dynamic/lib/libswresample.so.4.7.100
-#     $ENV{VCPKG_ROOT}/installed/x64-linux-dynamic/lib/libswscale.so.6.7.100
-#     $ENV{VCPKG_ROOT}/installed/x64-linux-dynamic/lib/libopencv_core4.so.4.7.0
-#     $ENV{VCPKG_ROOT}/installed/x64-linux-dynamic/lib/libopencv_imgcodecs4.so.4.7.0
-#     $ENV{VCPKG_ROOT}/installed/x64-linux-dynamic/lib/libopencv_imgproc4.so.4.7.0
-# )
-# 
-# foreach(SHARED_LIB ${MY_SHARED_LIBS})
-#     file(COPY ${SHARED_LIB} DESTINATION /home/c/projects/MyFFmpeg/lib)
-# endforeach()
 
 
 
