@@ -64,7 +64,7 @@ private:
 	AVPacket* m_packet{ nullptr };  // 数据包 av_packet_free
 	AVFrame* m_frame{ nullptr };  // 帧 av_frame_free
 	AVFrame* m_frame_bgr{ nullptr };  // bgr帧 av_frame_free
-    SwsContext* m_sws_ctx {nullptr};
+    	SwsContext* m_sws_ctx {nullptr};
 	uint8_t* m_bgr_buffer{nullptr}; // bgr缓冲区 av_free
 	bool m_is_destruction{ false }; // 是否已经销毁
 
