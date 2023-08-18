@@ -45,8 +45,8 @@ include_directories(
         "/home/wpwl/miniconda3/envs/py310/include/python3.10"
 )
 
-#pybind11_add_module(MyFFmpeg MyFFmpeg.cpp)
-add_executable(MyFFmpeg MyFFmpeg.cpp MyFFmpeg.h MyFFmpegState.h)
+pybind11_add_module(MyFFmpeg MyFFmpeg.cpp)
+#add_executable(MyFFmpeg MyFFmpeg.cpp MyFFmpeg.h MyFFmpegState.h)
 target_include_directories(MyFFmpeg PRIVATE ${FFMPEG_INCLUDE_DIRS} ${PYTHON_INCLUDE_DIRS})
 target_link_directories(MyFFmpeg PRIVATE ${FFMPEG_LIBRARY_DIRS})
 target_link_libraries(MyFFmpeg  
