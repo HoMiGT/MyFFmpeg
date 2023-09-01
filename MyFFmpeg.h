@@ -25,7 +25,7 @@ namespace py = pybind11;
 
 class MyFFmpeg {
 public:
-    MyFFmpeg(const std::string video_path,int width,int height,int timeout,double crop_y_rate,int open_try_count);
+    MyFFmpeg(const std::string video_path,int timeout,double crop_y_rate,int open_try_count);
 	~MyFFmpeg();
 
 	int initialize() noexcept; // 初始化
@@ -38,8 +38,6 @@ public:
 	static int my_interrupt_callback(void *opaque); // 定时检测打断
 
 private:
-    int m_width;
-    int m_height;
 	double m_crop_y_rate{ 0.5 };  // 默认高截取的比率
 	int m_open_try_count{ 0 };  // 打开尝试次数
 	int m_open_try_index{ 0 };  // 打开尝试索引

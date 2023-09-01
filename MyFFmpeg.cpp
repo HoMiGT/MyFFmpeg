@@ -8,19 +8,18 @@
 // 包装结果 pack result
 #define PKRT(k)  return ( StateConvert.count(static_cast<int>(k)) ? StateConvert.at(static_cast<int>(k)) : 3999 )
 
-inline void set_options(AVDictionary*& format_options,int width,int height){
-    auto video_size = std::to_string(width) + "x" + std::to_string(height);
-    av_dict_set(&format_options,"video_size",video_size.c_str(),0);
-    av_dict_set(&format_options, "pixel_format", "yuvj420p", 0);
-    av_dict_set(&format_options, "probesize", "10485760", 0); // 设置探测大小 10MB
-    av_dict_set(&format_options, "rtsp_transport", "tcp", 0);
-    av_dict_set(&format_options, "max_delay", "250", 0);
+inline void set_options(AVDictionary*& format_options){
+//    av_dict_set(&format_options, "pixel_format", "yuvj420p", 0);
+    av_dict_set(&format_options, "probesize", "4096", 0); // 设置探测大小 10MB
+    av_dict_set(&format_options,"analyzeduration","1000000",0); // 设置探测时长 1s
+//    av_dict_set(&format_options, "rtsp_transport", "tcp", 0);
+    av_dict_set(&format_options, "max_delay", "300", 0);
+    av_dict_set(&format_options,"stimeout","2000000",0); // 设置超时时间 2s
+    av_dict_set(&format_options,"timeout","2000000",0); // 设置超时时间 2s
 }
 
-MyFFmpeg::MyFFmpeg(const std::string video_path,int width,int height,int timeout,double crop_y_rate,int open_try_count)
+MyFFmpeg::MyFFmpeg(const std::string video_path,int timeout,double crop_y_rate,int open_try_count)
 	: m_video_path(video_path)
-    , m_width(width)
-    , m_height(height)
     , m_timeout(timeout)
 	, m_crop_y_rate(crop_y_rate)
 	, m_open_try_count(open_try_count)
@@ -62,15 +61,16 @@ int MyFFmpeg::initialize() noexcept {
         avformat_network_init();
         m_input_format = av_find_input_format("flv");
         if (!m_input_format) PKRT(INIT_ERR_ALLOC_INPUT_FORMAT);
-        m_open_start_time = static_cast<double>(cv::getTickCount());
+
 
         do {
             av_log(nullptr,AV_LOG_INFO,"open_try_index:%d\n",m_open_try_index);
             m_is_closed_input = false;
             m_is_free_options = false;
-            set_options(m_format_options,m_width,m_height);
+            set_options(m_format_options);
 
             m_format_ctx = avformat_alloc_context();
+            m_open_start_time = static_cast<double>(cv::getTickCount());
             m_format_ctx->interrupt_callback.callback = this->my_interrupt_callback;
             m_format_ctx->interrupt_callback.opaque = this;
             m_ret = avformat_open_input(&m_format_ctx, m_video_path.c_str(), m_input_format, &m_format_options);
@@ -96,7 +96,7 @@ int MyFFmpeg::initialize() noexcept {
                 m_is_free_options = true;
             }
             m_format_options = nullptr;
-        } while (m_open_try_index++ < m_open_try_count);
+        } while (++m_open_try_index < m_open_try_count);
         if (m_ret) PKRT(m_ret);
         if (m_stream_index == -1) PKRT(INIT_ERR_FIND_DECODER);
         m_open_flag = true;
@@ -254,6 +254,7 @@ int MyFFmpeg::my_interrupt_callback(void *opaque){
 	if(p){
 	    auto duration = ((double)cv::getTickCount() - p->m_open_start_time)*1000.0 / cv::getTickFrequency();
 		if(!p->m_open_flag && duration > (double)p->m_timeout){
+            av_log(nullptr,AV_LOG_INFO,"open_index:%d, duration:%f, timeout:%f\n",p->m_open_try_index,duration,p->m_timeout);
 			return 1;
 		} 
 	}
@@ -269,10 +270,8 @@ MyFFmpeg::~MyFFmpeg() {
 
 PYBIND11_MODULE(MyFFmpeg, m) {
 	py::class_<MyFFmpeg>(m, "MyFFmpeg")
-		.def(py::init<const std::string,const int,const int,const int, const double, const int>(),
+		.def(py::init<const std::string,const int, const double, const int>(),
 		        py::arg("video_path"),
-                py::arg("width"),
-                py::arg("height"),
                 py::arg("timeout") = 2000,
                 py::arg("crop_height_rate")=0.5,
                 py::arg("open_try_count") = 5,
@@ -285,7 +284,7 @@ PYBIND11_MODULE(MyFFmpeg, m) {
 
 
 int main(){
-    MyFFmpeg f("/home/wpwl/Projects/MyFFmpeg/3.flv",540,960,2000,0.5,5);
+    MyFFmpeg f("/home/wpwl/Projects/MyFFmpeg/3.flv",2000,0.5,5);
     auto ret = f.initialize();
     std::cout<<"ret:" << ret <<std::endl;
 
