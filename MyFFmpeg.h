@@ -40,7 +40,6 @@ public:
 private:
 	double m_crop_y_rate{ 0.5 };  // 默认高截取的比率
 	int m_open_try_count{ 0 };  // 打开尝试次数
-	int m_open_try_index{ 0 };  // 打开尝试索引
 	int m_timeout{0};  // 超时断开连接
 	int m_crop_x{ 0 };  // 截取图片的x坐标
 	int m_crop_y{ 0 };  // 截图图片的y坐标

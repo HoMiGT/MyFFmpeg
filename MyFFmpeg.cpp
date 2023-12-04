@@ -62,9 +62,12 @@ int MyFFmpeg::initialize() noexcept {
         m_input_format = av_find_input_format("flv");
         if (!m_input_format) PKRT(INIT_ERR_ALLOC_INPUT_FORMAT);
 
-
-        do {
-            av_log(nullptr,AV_LOG_INFO,"open_try_index:%d\n",m_open_try_index);
+        auto open_try_index = 0;
+        for(;;){
+//            av_log(nullptr,AV_LOG_INFO,"open_try_index:%d\n",m_open_try_index);
+            if (++open_try_index >= m_open_try_count){
+                PKRT(AV_STREAM_NOT_FOUND);
+            }
             m_is_closed_input = false;
             m_is_free_options = false;
             set_options(m_format_options);
@@ -96,12 +99,12 @@ int MyFFmpeg::initialize() noexcept {
                 m_is_free_options = true;
             }
             m_format_options = nullptr;
-        } while (++m_open_try_index < m_open_try_count);
+        }
         if (m_ret) PKRT(m_ret);
         if (m_stream_index == -1) PKRT(INIT_ERR_FIND_DECODER);
         m_open_flag = true;
         
-        av_dump_format(m_format_ctx, -1, m_video_path.c_str(), 0);
+        // av_dump_format(m_format_ctx, -1, m_video_path.c_str(), 0);
 
         m_codec = avcodec_find_decoder(m_format_ctx->streams[m_stream_index]->codecpar->codec_id);
         if (!m_codec) PKRT(INIT_ERR_FIND_DECODER);
@@ -254,7 +257,7 @@ int MyFFmpeg::my_interrupt_callback(void *opaque){
 	if(p){
 	    auto duration = ((double)cv::getTickCount() - p->m_open_start_time)*1000.0 / cv::getTickFrequency();
 		if(!p->m_open_flag && duration > (double)p->m_timeout){
-            av_log(nullptr,AV_LOG_INFO,"open_index:%d, duration:%f, timeout:%f\n",p->m_open_try_index,duration,p->m_timeout);
+//            av_log(nullptr,AV_LOG_INFO,"open_index:%d, duration:%f, timeout:%f\n",p->m_open_try_index,duration,p->m_timeout);
 			return 1;
 		} 
 	}
