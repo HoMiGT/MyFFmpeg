@@ -2,6 +2,8 @@
 
 project ("MyFFmpeg" LANGUAGES CXX)
 
+cmake_policy(SET CMP0148 NEW)
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake")
@@ -27,10 +29,13 @@ set(ENV{PKG_CONFIG_PATH} "/usr/local/ffmpeg/lib/pkgconfig")
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(FFMPEG REQUIRED IMPORTED_TARGET libavformat libavcodec libavutil libswscale libavfilter)
 
-set(Python3_ROOT_DIR "/home/wpwl/miniconda3/envs/py310")
-set(Python_ADDITIONAL_VERSIONS 3.10.11)
-find_package(PythonInterp REQUIRED)
-find_package(PythonLibs REQUIRED)
+# set(Python3_ROOT_DIR "/home/wpwl/miniconda3/envs/py310")
+set(Python3_ROOT_DIR "/home/wpwl/miniconda3/envs/py311")
+# set(Python_ADDITIONAL_VERSIONS 3.10.11)
+set(Python_ADDITIONAL_VERSIONS 3.11.5)
+# find_package(PythonInterp REQUIRED)
+# find_package(PythonLibs REQUIRED)
+find_package(Python3 REQUIRED COMPONENTS Interpreter Development)
 
 set(pybind11_DIR "/usr/local/pybind11/share/cmake/pybind11")
 find_package(Python3 REQUIRED COMPONENTS Interpreter Development)
@@ -42,7 +47,8 @@ include_directories(
         "/usr/local/pybind11/include"
         "/usr/local/ffmpeg/include"
         "/usr/local/opencv4/include/"
-        "/home/wpwl/miniconda3/envs/py310/include/python3.10"
+        # "/home/wpwl/miniconda3/envs/py310/include/python3.10"
+        "/home/wpwl/miniconda3/envs/py311/include/python3.11"
 )
 
 pybind11_add_module(MyFFmpeg MyFFmpeg.cpp)

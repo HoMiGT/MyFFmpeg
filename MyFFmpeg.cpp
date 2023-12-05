@@ -59,12 +59,12 @@ void MyFFmpeg::destruction() {
 int MyFFmpeg::initialize() noexcept {
     try{
         avformat_network_init();
-        m_input_format = av_find_input_format("flv");
-        if (!m_input_format) PKRT(INIT_ERR_ALLOC_INPUT_FORMAT);
+        // m_input_format = av_find_input_format("flv");
+        // if (!m_input_format) PKRT(INIT_ERR_ALLOC_INPUT_FORMAT);
 
         auto open_try_index = 0;
         for(;;){
-//            av_log(nullptr,AV_LOG_INFO,"open_try_index:%d\n",m_open_try_index);
+//            av_log(nullptr,AV_LOG_INFO,"open_try_index:%d\n",open_try_index);
             if (++open_try_index >= m_open_try_count){
                 PKRT(AV_STREAM_NOT_FOUND);
             }
@@ -104,7 +104,7 @@ int MyFFmpeg::initialize() noexcept {
         if (m_stream_index == -1) PKRT(INIT_ERR_FIND_DECODER);
         m_open_flag = true;
         
-        // av_dump_format(m_format_ctx, -1, m_video_path.c_str(), 0);
+//        av_dump_format(m_format_ctx, -1, m_video_path.c_str(), 0);
 
         m_codec = avcodec_find_decoder(m_format_ctx->streams[m_stream_index]->codecpar->codec_id);
         if (!m_codec) PKRT(INIT_ERR_FIND_DECODER);
